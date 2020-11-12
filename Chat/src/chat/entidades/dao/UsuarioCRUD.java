@@ -8,19 +8,19 @@ package chat.entidades.dao;
 public class UsuarioCRUD {
 
     protected static final String CMD_LISTAR
-            = "SELECT cedula, apellidos, nombre, nacimiento FROM persona "
-            + "ORDER BY apellidos, nombre; ";
+            = "SELECT nombre, nombre_Completo, clave, ultimoAcceso FROM usuario "
+            + "ORDER BY nombre_Completo, nombre; ";
     protected static final String CMD_AGREGAR
-            = "INSERT INTO persona (cedula, apellidos, nombre, nacimiento) "
+            = "INSERT INTO usuario (nombre, nombre_Completo, clave, ultimoAcceso) "
             + "VALUES (?, ?, ?, ?); ";
 
     protected static final String CMD_RECUPERAR
-            = "SELECT cedula, apellidos, nombre, nacimiento FROM persona "
-            + "WHERE cedula = ?; ";
+            = "SELECT nombre, nombre_Completo, clave, ultimoAcceso FROM usuario "
+            + "WHERE nombre = ?; ";
     protected static final String CMD_ACTUALIZAR
-            = "UPDATE persona SET apellidos = ?, nombre = ?, nacimiento = ? "
-            + "WHERE cedula = ?; ";
+            = "UPDATE usuario SET nombre = ?, clave = ?, ultimoAcceso = ? "
+            + "WHERE nombre = ?; ";
     protected static final String CMD_ELIMINAR
-            = "DELETE FROM persona "
-            + "WHERE cedula = ?; ";
+            = "DELETE FROM usuario "
+            + "WHERE nombre = ?; ";
 }
