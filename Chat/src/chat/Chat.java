@@ -5,6 +5,11 @@
  */
 package chat;
 
+import chat.entidades.Modelo;
+import chat.entidades.Usuario;
+import chat.entidades.dao.UsuarioDAO;
+import java.time.LocalDate;
+
 /**
  *
  * @author Jose David
@@ -16,6 +21,11 @@ public class Chat {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        //Usuario marvin = new Usuario("marv02", "Marvin Aguilar", "1234", LocalDate.now());
+        Modelo modelo = new Modelo();
+        //modelo.agregar(marvin);
+        Usuario usuario2 = modelo.recuperar("Jose");
+        System.out.println(usuario2);
     }
     
 }

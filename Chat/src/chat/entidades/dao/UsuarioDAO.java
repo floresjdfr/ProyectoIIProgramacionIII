@@ -55,7 +55,7 @@ public class UsuarioDAO implements DAO<String, Usuario> {
     }
 
     @Override
-    public void agregar(String id, Usuario nuevoUsuario) {
+    public void agregar(String nombre, Usuario nuevoUsuario) {
         try (Connection cnx = bd.getConnection();
                 PreparedStatement stm = cnx.prepareStatement(UsuarioCRUD.CMD_AGREGAR)) {
             stm.clearParameters();
@@ -104,7 +104,7 @@ public class UsuarioDAO implements DAO<String, Usuario> {
     }
 
     @Override
-    public void actualizar(String id, Usuario usuario) {
+    public void actualizar(String nombre, Usuario usuario) {
         try (Connection cnx = bd.getConnection();
                 PreparedStatement stm = cnx.prepareStatement(UsuarioCRUD.CMD_ACTUALIZAR)) {
             stm.clearParameters();
