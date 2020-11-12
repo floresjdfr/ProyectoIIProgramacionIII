@@ -9,7 +9,7 @@ public class UsuarioCRUD {
 
     protected static final String CMD_LISTAR
             = "SELECT nombre, nombre_Completo, clave, ultimoAcceso FROM usuario "
-            + "ORDER BY nombre_Completo, nombre; ";
+            + "ORDER BY nombre_Completo; ";
     protected static final String CMD_AGREGAR
             = "INSERT INTO usuario (nombre, nombre_Completo, clave, ultimoAcceso) "
             + "VALUES (?, ?, ?, ?); ";
