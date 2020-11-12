@@ -42,10 +42,10 @@ public class UsuarioDAO implements DAO<String, Usuario> {
                 ResultSet rs = stm.executeQuery(UsuarioCRUD.CMD_LISTAR)) {
             while (rs.next()) {
                 r.add(new Usuario(
-                        rs.getString("cedula"),
-                        rs.getString("apellidos"),
                         rs.getString("nombre"),
-                        rs.getDate("nacimiento").toLocalDate()
+                        rs.getString("nombre_completo"),
+                        rs.getString("clave"),
+                        rs.getDate("ultimoAcceso").toLocalDate()
                 ));
             }
         } catch (SQLException ex) {
@@ -55,18 +55,18 @@ public class UsuarioDAO implements DAO<String, Usuario> {
     }
 
     @Override
-    public void agregar(String id, Usuario nuevaPersona) {
+    public void agregar(String id, Usuario nuevoUsuario) {
         try (Connection cnx = bd.getConnection();
                 PreparedStatement stm = cnx.prepareStatement(UsuarioCRUD.CMD_AGREGAR)) {
             stm.clearParameters();
-            stm.setString(1, nuevaPersona.getId());
-            stm.setString(2, nuevaPersona.getApellidos());
-            stm.setString(3, nuevaPersona.getNombre());
-            stm.setDate(4, Date.valueOf(nuevaPersona.getNacimiento()));
+            stm.setString(1, nuevoUsuario.getNombreUsuario());
+            stm.setString(2, nuevoUsuario.getNombreCompleto());
+            stm.setString(3, nuevoUsuario.getClave());
+            stm.setDate(4, Date.valueOf(nuevoUsuario.getUltimoAcceso()));
             if (stm.executeUpdate() != 1) {
                 throw new IllegalArgumentException(
                         String.format("No se pudo agregar el registro: '%s'",
-                                nuevaPersona.getId()));
+                                nuevoUsuario.getNombreUsuario()));
             }
         } catch (IllegalArgumentException | SQLException ex) {
             System.err.printf("Excepción: '%s'%n", ex.getMessage());
@@ -75,7 +75,7 @@ public class UsuarioDAO implements DAO<String, Usuario> {
     }
 
     public void agregar(Usuario p) {
-        agregar(p.getId(), p);
+        agregar(p.getNombreUsuario(), p);
     }
 
     @Override
@@ -89,10 +89,10 @@ public class UsuarioDAO implements DAO<String, Usuario> {
                 try (ResultSet rs = stm.executeQuery()) {
                     if (rs.next()) {
                         resultado = new Usuario(
-                                rs.getString("cedula"),
-                                rs.getString("apellidos"),
                                 rs.getString("nombre"),
-                                rs.getDate("nacimiento").toLocalDate()
+                                rs.getString("nombre_completo"),
+                                rs.getString("clave"),
+                                rs.getDate("ultimoAcceso").toLocalDate()
                         );
                     }
                 }
@@ -104,18 +104,19 @@ public class UsuarioDAO implements DAO<String, Usuario> {
     }
 
     @Override
-    public void actualizar(String id, Usuario persona) {
+    public void actualizar(String id, Usuario usuario) {
         try (Connection cnx = bd.getConnection();
                 PreparedStatement stm = cnx.prepareStatement(UsuarioCRUD.CMD_ACTUALIZAR)) {
             stm.clearParameters();
-            stm.setString(1, persona.getApellidos());
-            stm.setString(2, persona.getNombre());
-            stm.setDate(3, Date.valueOf(persona.getNacimiento()));
-            stm.setString(4, persona.getId());
+            stm.setString(1, usuario.getNombreUsuario());
+            stm.setString(2, usuario.getNombreCompleto());
+            stm.setString(3, usuario.getClave());
+            stm.setDate(4, Date.valueOf(usuario.getUltimoAcceso()));
+            
             if (stm.executeUpdate() != 1) {
                 throw new IllegalArgumentException(
                         String.format("No se pudo actualizar el registro: '%s'",
-                                persona.getId()));
+                                usuario.getNombreUsuario()));
             }
         } catch (IllegalArgumentException | SQLException ex) {
             System.err.printf("Excepción: '%s'%n", ex.getMessage());
@@ -124,16 +125,16 @@ public class UsuarioDAO implements DAO<String, Usuario> {
     }
 
     public void actualizar(Usuario p) {
-        actualizar(p.getId(), p);
+        actualizar(p.getNombreUsuario(), p);
     }
 
     @Override
-    public void eliminar(String id) {
+    public void eliminar(String nombreUsuario) {
         try {
             try (Connection cnx = bd.getConnection();
                     PreparedStatement stm = cnx.prepareStatement(UsuarioCRUD.CMD_ELIMINAR)) {
                 stm.clearParameters();
-                stm.setString(1, id);
+                stm.setString(1, nombreUsuario);
                 if (stm.executeUpdate() != 1) {
                     throw new IllegalArgumentException();
                 }
@@ -169,10 +170,10 @@ public class UsuarioDAO implements DAO<String, Usuario> {
             try (ResultSet rs = stm.executeQuery()) {
                 while (rs.next()) {
                     r.add(new Usuario(
-                            rs.getString("cedula"),
-                            rs.getString("apellidos"),
                             rs.getString("nombre"),
-                            rs.getDate("nacimiento").toLocalDate()
+                            rs.getString("nombre_completo"),
+                            rs.getString("clave"),
+                            rs.getDate("ultimoAcceso").toLocalDate()
                     ));
                 }
             }
@@ -202,13 +203,13 @@ public class UsuarioDAO implements DAO<String, Usuario> {
                 agregar(p);
             } catch (Exception ex1) {
                 System.err.printf("No se pudo agregar: %s (%s)%n",
-                        p.getId(), ex1.getMessage());
+                        p.getNombreUsuario(), ex1.getMessage());
                 try {
                     System.out.printf("Actualizando: %s..%n", p);
                     actualizar(p);
                 } catch (Exception ex2) {
                     System.err.printf("No se pudo actualizar: %s (%s)%n",
-                            p.getId(), ex2.getMessage());
+                            p.getNombreUsuario(), ex2.getMessage());
                 }
             }
         });
@@ -227,9 +228,9 @@ public class UsuarioDAO implements DAO<String, Usuario> {
     private static final String CMD_CUENTA_REGISTROS
             = "SELECT COUNT(*) AS cuenta FROM persona; ";
     private static final String CMD_SELECCIONAR
-            = "SELECT cedula, apellidos, nombre, nacimiento FROM persona "
-            + "WHERE EXTRACT(YEAR FROM nacimiento) = ? "
-            + "ORDER BY apellidos, nombre; ";
+            = "SELECT nombre, nombre_completo, clave, ultimoAcceso FROM usuario"
+            + "WHERE EXTRACT(YEAR FROM ultimoAccesp) = ? "
+            + "ORDER BY nombre_completo; ";
 
     private static UsuarioDAO instancia = null;
     private BaseDatos bd;
