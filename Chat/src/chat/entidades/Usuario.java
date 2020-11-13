@@ -15,13 +15,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "persona", propOrder = {"id", "apellidos", "nombre", "nacimiento"})
 public class Usuario {
 
-    public Usuario(String nombreUsuario, String nombreCompleto, String clave, LocalDate ultimoAcceso, List<Mensaje> enviados, List<Mensaje> recibidos) {
+    public Usuario(String nombreUsuario, String nombreCompleto, String clave, LocalDate ultimoAcceso, List<Mensaje> enviados, List<Mensaje> recibidos, List<String> contactos) {
         this.nombreUsuario = nombreUsuario;
         this.nombreCompleto = nombreCompleto;
         this.clave = clave;
         this.ultimoAcceso = ultimoAcceso;
         this.enviados = enviados;
         this.recibidos = recibidos;
+        this.contatos = contactos;
     }
 
     public Usuario(String nombreUsuario, String nombreCompleto, String clave, LocalDate ultimoAcceso) {
@@ -31,12 +32,13 @@ public class Usuario {
         this.ultimoAcceso = ultimoAcceso;
         this.enviados = new ArrayList<>();
         this.recibidos = new ArrayList<>();
+        this.contatos = new ArrayList<>();
     }
 
-    
     private Usuario() {
         this.enviados = new ArrayList<>();
         this.recibidos = new ArrayList<>();
+        this.contatos = new ArrayList<>();
     }
 
     @Override
@@ -93,6 +95,14 @@ public class Usuario {
     public void setRecibidos(List<Mensaje> recibidos) {
         this.recibidos = recibidos;
     }
+    
+    public List<String> getContatos() {
+        return contatos;
+    }
+
+    public void setContatos(List<String> contatos) {
+        this.contatos = contatos;
+    }
 
     private String nombreUsuario;
     private String nombreCompleto;
@@ -100,5 +110,6 @@ public class Usuario {
     private LocalDate ultimoAcceso;
     private List<Mensaje> enviados;
     private List<Mensaje> recibidos;
+    private List<String> contatos;
 }
 
