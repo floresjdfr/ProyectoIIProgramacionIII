@@ -112,7 +112,7 @@ public class VentanaLogIn extends JFrame {
         btnLogin.addActionListener((ActionEvent e) -> {  
             if(validaDatos(campoTextoUsuario.getText(), String.valueOf(campoTextoPassword.getPassword()))) {
                 dispose();
-                new VentanaChat("Chat de Texto (DEMO)").init();
+                new VentanaChat("Chat de Texto").init();
             }
             else {
                 JOptionPane.showMessageDialog(this,"Usuario y/o Contraseña Incorrectos!");

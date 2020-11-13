@@ -1,6 +1,7 @@
 package chat;
 
 import chat.vista.VentanaAplicacion;
+import chat.vista.VentanaChat;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
@@ -30,6 +31,7 @@ public class Chat {
     
     public static void mostrarInterfaz() {
         new VentanaAplicacion("Chat").init();
+        //new VentanaChat("Chat de Texto (DEMO)").init();
     }
     
 }
