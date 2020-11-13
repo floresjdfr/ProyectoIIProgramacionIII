@@ -18,7 +18,7 @@ public class UsuarioCRUD {
             = "SELECT nombre, nombre_Completo, clave, ultimoAcceso FROM usuario "
             + "WHERE nombre = ?; ";
     protected static final String CMD_ACTUALIZAR
-            = "UPDATE usuario SET nombre = ?, clave = ?, ultimoAcceso = ? "
+            = "UPDATE usuario SET nombre_completo = ?, clave = ?, ultimoAcceso = ? "
             + "WHERE nombre = ?; ";
     protected static final String CMD_ELIMINAR
             = "DELETE FROM usuario "

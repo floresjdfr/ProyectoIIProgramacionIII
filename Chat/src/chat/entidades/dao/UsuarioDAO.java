@@ -226,10 +226,10 @@ public class UsuarioDAO implements DAO<String, Usuario> {
     }
 
     private static final String CMD_CUENTA_REGISTROS
-            = "SELECT COUNT(*) AS cuenta FROM persona; ";
+            = "SELECT COUNT(*) AS cuenta FROM usuario; ";
     private static final String CMD_SELECCIONAR
             = "SELECT nombre, nombre_completo, clave, ultimoAcceso FROM usuario"
-            + "WHERE EXTRACT(YEAR FROM ultimoAccesp) = ? "
+            + "WHERE EXTRACT(YEAR FROM ultimoAcceso) = ? "
             + "ORDER BY nombre_completo; ";
 
     private static UsuarioDAO instancia = null;

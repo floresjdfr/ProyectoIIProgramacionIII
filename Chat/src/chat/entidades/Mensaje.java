@@ -12,13 +12,12 @@ import javax.xml.bind.annotation.XmlAccessorType;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Mensaje implements Serializable  {
 
-    public Mensaje(int sentencia, String sender, String reciever, String message, LocalDate fecha, String texto, boolean enviado) {
-        this.sentencia = sentencia;
+    public Mensaje(int sentencia, String sender, String reciever, String message, LocalDate fecha, Boolean enviado) {
+        this.secuencia = sentencia;
         this.sender = sender;
         this.reciever = reciever;
         this.message = message;
         this.fecha = fecha;
-        this.texto = texto;
         this.enviado = enviado;
     }
 
@@ -49,12 +48,12 @@ public class Mensaje implements Serializable  {
         this.message = message;
     }
     
-    public int getSentencia() {
-        return sentencia;
+    public int getSecuencia() {
+        return secuencia;
     }
 
-    public void setSentencia(int sentencia) {
-        this.sentencia = sentencia;
+    public void setSecuencia(int secuencia) {
+        this.secuencia = secuencia;
     }
 
     public LocalDate getFecha() {
@@ -65,28 +64,19 @@ public class Mensaje implements Serializable  {
         this.fecha = fecha;
     }
 
-    public String getTexto() {
-        return texto;
-    }
-
-    public void setTexto(String texto) {
-        this.texto = texto;
-    }
-
-    public boolean isEnviado() {
+    public Boolean isEnviado() {
         return enviado;
     }
 
-    public void setEnviado(boolean enviado) {
+    public void setEnviado(Boolean enviado) {
         this.enviado = enviado;
     }
     
-    private int sentencia;
+    private int secuencia;
     private String sender;
     private String reciever;
     private String message;
     private LocalDate fecha;
-    private String texto;
-    private boolean enviado;
+    private Boolean enviado;
   
 }
