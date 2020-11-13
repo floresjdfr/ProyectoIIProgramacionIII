@@ -24,9 +24,19 @@ public class Usuario {
         this.recibidos = recibidos;
     }
 
+    public Usuario(String nombreUsuario, String nombreCompleto, String clave, LocalDate ultimoAcceso) {
+        this.nombreUsuario = nombreUsuario;
+        this.nombreCompleto = nombreCompleto;
+        this.clave = clave;
+        this.ultimoAcceso = ultimoAcceso;
+        this.enviados = new ArrayList<>();
+        this.recibidos = new ArrayList<>();
+    }
+
+    
     private Usuario() {
-        enviados = new ArrayList<>();
-        recibidos = new ArrayList<>();
+        this.enviados = new ArrayList<>();
+        this.recibidos = new ArrayList<>();
     }
 
     @Override
