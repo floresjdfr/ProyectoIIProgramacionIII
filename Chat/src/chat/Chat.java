@@ -32,7 +32,7 @@ public class Chat {
     
     public static void mostrarInterfaz() {
         new VentanaAplicacion("Chat", new ControlChat()).init();
-        //new VentanaChat("Chat de Texto (DEMO)").init();
+        //new VentanaChat("Chat de Texto (DEMO)", new ControlChat()).init();
     }
     
 }

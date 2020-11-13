@@ -46,8 +46,8 @@ public class ControlChat {
         return datos.recuperar(nombreUsuario);
     }
 
-    public void agregar(Usuario p) {
-        datos.agregar(p);
+    public void agregar(String usuario, String nombreCompleto, String password) {
+        datos.agregar(usuario, nombreCompleto, password);
     }
 
     public void actualizar(Usuario p) {

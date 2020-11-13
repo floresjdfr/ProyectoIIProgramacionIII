@@ -4,6 +4,7 @@ import chat.control.ControlChat;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.HeadlessException;
@@ -15,6 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -64,8 +66,11 @@ public class VentanaRegistro extends JFrame {
         campoTextoPassword = new JPasswordField();
         campoTextoPassword.setPreferredSize(new Dimension(120, 20));
         
-        btnLogin = new JButton("Registrarse");
-        btnLogin.setPreferredSize(new Dimension(120, 30));
+        btnRegistrarse = new JButton("Registrarse");
+        btnRegistrarse.setPreferredSize(new Dimension(120, 30));
+        
+        btnRegresar = new JButton("Regresar");
+        btnRegresar.setPreferredSize(new Dimension(120, 30));
         
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);
@@ -124,12 +129,23 @@ public class VentanaRegistro extends JFrame {
         gbc.weighty = 0;
         gbc.anchor = GridBagConstraints.CENTER;
         gbc.fill = GridBagConstraints.NONE;
-        panelCentral.add(btnLogin, gbc);
+        panelCentral.add(btnRegistrarse, gbc);
 
         c.add(panelCentral, BorderLayout.CENTER);
         
-        btnLogin.addActionListener((ActionEvent e) -> {
-            
+        JPanel panelInferior = new JPanel();
+        panelInferior.setLayout(new FlowLayout(FlowLayout.RIGHT));
+        
+        panelInferior.add(btnRegresar);
+        
+        c.add(panelInferior, BorderLayout.PAGE_END);
+        
+        btnRegistrarse.addActionListener((ActionEvent e) -> {
+            registrarUsuario();
+        });
+        
+        btnRegresar.addActionListener((ActionEvent e) -> {
+            volverInicio();
         });
     }
 
@@ -137,10 +153,29 @@ public class VentanaRegistro extends JFrame {
         setVisible(true);
     }
     
+    public void registrarUsuario() {
+        String usuario = campoTextoUsuario.getText();
+        String nombreCompleto = campoTextoNombre.getText();
+        String password = String.valueOf(campoTextoPassword.getPassword());
+        
+        gestorPrincipal.agregar(usuario, nombreCompleto, password);
+        
+        JOptionPane.showMessageDialog(this,"Usuario registrado!");
+        
+        dispose();
+        new VentanaChat("Chat de Texto", gestorPrincipal).init();
+    }
+    
+    public void volverInicio() {
+        dispose();
+        new VentanaAplicacion("Chat", gestorPrincipal).init();
+    }
+    
     private JTextField campoTextoUsuario;
     private JTextField campoTextoNombre;
     private JPasswordField campoTextoPassword;
-    private JButton btnLogin;
+    private JButton btnRegistrarse;
+    private JButton btnRegresar;
     
     private final ControlChat gestorPrincipal;
 }

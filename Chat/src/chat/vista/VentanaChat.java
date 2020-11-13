@@ -5,10 +5,12 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.HeadlessException;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -90,6 +92,11 @@ public class VentanaChat extends JFrame {
         panelCentral.setBorder(BorderFactory.createTitledBorder(
                 BorderFactory.createEtchedBorder(), "Chat", TitledBorder.LEFT, TitledBorder.DEFAULT_POSITION));
         
+        campoChat = new JTextArea();
+        campoChat.setLineWrap(true);
+        campoChat.setEditable(false);
+        scrollPanelChat = new JScrollPane(campoChat);
+        
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);
         
@@ -99,7 +106,7 @@ public class VentanaChat extends JFrame {
         gbc.weighty = 1;
         gbc.anchor = GridBagConstraints.CENTER;
         gbc.fill = GridBagConstraints.BOTH;
-        panelCentral.add(new JTextArea(), gbc);
+        panelCentral.add(scrollPanelChat, gbc);
 
         c.add(panelCentral, BorderLayout.CENTER);
         
@@ -130,7 +137,7 @@ public class VentanaChat extends JFrame {
         panelInferior.setLayout(new BoxLayout(panelInferior, BoxLayout.X_AXIS));
         panelInferior.setBorder(BorderFactory.createEmptyBorder(10, 8, 10, 8));
         
-        JTextField campoMensaje = new JTextField();
+        campoMensaje = new JTextField();
         campoMensaje.setPreferredSize(new Dimension(300, 20));
         campoMensaje.setMaximumSize(new Dimension(300, 20));
         btnEnviarMensaje = new JButton("Enviar Mensaje");
@@ -140,15 +147,41 @@ public class VentanaChat extends JFrame {
         panelInferior.add(btnEnviarMensaje);
         
         c.add(panelInferior, BorderLayout.PAGE_END);
+        
+        btnEnviarMensaje.addActionListener((ActionEvent e) -> {
+            enviarMensaje();
+        });
+        
+        btnLogOut.addActionListener((ActionEvent e) -> {
+            logOut();
+        });
     }
 
     public void init() {
         setVisible(true);
     }
     
+    public void enviarMensaje() {
+        String mensaje = campoMensaje.getText();
+        
+        campoChat.append(mensaje + "\n");
+        
+        campoMensaje.setText(null);
+    }
+    
+    public void logOut() {
+        dispose();
+        new VentanaAplicacion("Chat", gestorPrincipal).init();
+    }
+    
     private DefaultTableModel modeloTabla;
     private JScrollPane scrollPanelTabla;
     private JTable tablaListaContactos;
+    
+    private JScrollPane scrollPanelChat;
+    private JTextArea campoChat;
+    
+    private JTextField campoMensaje;
     
     private JComboBox<String> listaEstado;
     private JButton btnLogOut;

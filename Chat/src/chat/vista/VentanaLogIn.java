@@ -1,9 +1,12 @@
 package chat.vista;
 
 import chat.control.ControlChat;
+import com.privatejgoodies.forms.layout.FormLayout;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.HeadlessException;
@@ -65,6 +68,9 @@ public class VentanaLogIn extends JFrame {
         btnLogin = new JButton("Log In");
         btnLogin.setPreferredSize(new Dimension(120, 30));
         
+        btnRegresar = new JButton("Regresar");
+        btnRegresar.setPreferredSize(new Dimension(120, 30));
+        
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);
         
@@ -110,8 +116,19 @@ public class VentanaLogIn extends JFrame {
 
         c.add(panelCentral, BorderLayout.CENTER);
         
+        JPanel panelInferior = new JPanel();
+        panelInferior.setLayout(new FlowLayout(FlowLayout.RIGHT));
+        
+        panelInferior.add(btnRegresar);
+        
+        c.add(panelInferior, BorderLayout.PAGE_END);
+        
         btnLogin.addActionListener((ActionEvent e) -> {
             validaDatos();
+        });
+        
+        btnRegresar.addActionListener((ActionEvent e) -> {
+            volverInicio();
         });
     }
 
@@ -131,9 +148,15 @@ public class VentanaLogIn extends JFrame {
             JOptionPane.showMessageDialog(this,"Usuario y/o Contraseña Incorrectos!");
     }
     
+    public void volverInicio() {
+        dispose();
+        new VentanaAplicacion("Chat", gestorPrincipal).init();
+    }
+    
     private JTextField campoTextoUsuario;
     private JPasswordField campoTextoPassword;
     private JButton btnLogin;
+    private JButton btnRegresar;
     
     private final ControlChat gestorPrincipal;
 }

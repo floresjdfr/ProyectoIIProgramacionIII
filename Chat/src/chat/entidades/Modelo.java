@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.time.LocalDate;
 import java.util.Observable;
 import javax.xml.bind.JAXBException;
 
@@ -24,16 +25,17 @@ public class Modelo extends Observable {
         return usuarios.cuentaPersonas();
     }
 
-    public Usuario recuperar(String id) {
-        return usuarios.recuperar(id);
+    public Usuario recuperar(String usuario) {
+        return usuarios.recuperar(usuario);
     }
 
-    public void agregar(Usuario nuevaPersona) {
-        usuarios.agregar(nuevaPersona);
+    public void agregar(String usuario, String nombreCompleto, String password) {
+        Usuario nuevoUsuario = new Usuario(usuario, nombreCompleto, password, LocalDate.now());
+        usuarios.agregar(nuevoUsuario);
 
         setChanged();
         notifyObservers(new EventoActualizacion(
-                OperacionActualizacion.OPERACION_AGREGAR, nuevaPersona));
+                OperacionActualizacion.OPERACION_AGREGAR, nuevoUsuario));
     }
 
     public void actualizar(Usuario persona) {
