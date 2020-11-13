@@ -2,6 +2,8 @@
 package chat.entidades;
 import chat.entidades.xml.LocalDateAdapter;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import javax.xml.bind.annotation.XmlType;
 
 /**
@@ -13,18 +15,19 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "persona", propOrder = {"id", "apellidos", "nombre", "nacimiento"})
 public class Usuario {
 
-
-    public Usuario(String nombreUsuario, String nombreCompleto, String clave, LocalDate ultimoAcceso) {
+    public Usuario(String nombreUsuario, String nombreCompleto, String clave, LocalDate ultimoAcceso, List<Mensaje> enviados, List<Mensaje> recibidos) {
         this.nombreUsuario = nombreUsuario;
         this.nombreCompleto = nombreCompleto;
         this.clave = clave;
         this.ultimoAcceso = ultimoAcceso;
+        this.enviados = enviados;
+        this.recibidos = recibidos;
     }
 
     private Usuario() {
-        this(null, null, null, null);
+        enviados = new ArrayList<>();
+        recibidos = new ArrayList<>();
     }
-
 
     @Override
     public String toString() {
@@ -64,12 +67,28 @@ public class Usuario {
     public void setUltimoAcceso(LocalDate ultimoAcceso) {
         this.ultimoAcceso = ultimoAcceso;
     }
+    
+    public List<Mensaje> getEnviados() {
+        return enviados;
+    }
 
-   
+    public void setEnviados(List<Mensaje> enviados) {
+        this.enviados = enviados;
+    }
+
+    public List<Mensaje> getRecibidos() {
+        return recibidos;
+    }
+
+    public void setRecibidos(List<Mensaje> recibidos) {
+        this.recibidos = recibidos;
+    }
 
     private String nombreUsuario;
     private String nombreCompleto;
     private String clave;
     private LocalDate ultimoAcceso;
+    private List<Mensaje> enviados;
+    private List<Mensaje> recibidos;
 }
 
