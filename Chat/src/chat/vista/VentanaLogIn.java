@@ -109,8 +109,8 @@ public class VentanaLogIn extends JFrame {
 
         c.add(panelCentral, BorderLayout.CENTER);
         
-        btnLogin.addActionListener((ActionEvent e) -> {
-            if(validaDatos(campoTextoUsuario.getText(), campoTextoPassword.getText())) {
+        btnLogin.addActionListener((ActionEvent e) -> {  
+            if(validaDatos(campoTextoUsuario.getText(), String.valueOf(campoTextoPassword.getPassword()))) {
                 dispose();
                 new VentanaChat("Chat de Texto (DEMO)").init();
             }
