@@ -1,5 +1,6 @@
 package chat.vista;
 
+import chat.control.ControlChat;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -32,9 +33,9 @@ import javax.swing.table.DefaultTableModel;
  */
 public class VentanaChat extends JFrame {
     
-    public VentanaChat(String titulo) throws HeadlessException {
+    public VentanaChat(String titulo, ControlChat gestorPrincipal) throws HeadlessException {
         super(titulo);
-        //this.gestorPrincipal = gestorPrincipal;
+        this.gestorPrincipal = gestorPrincipal;
         configurar();
 
     }
@@ -144,12 +145,6 @@ public class VentanaChat extends JFrame {
     public void init() {
         setVisible(true);
     }
-
-    /*
-    public ControlAplicacion getGestorPrincipal() {
-        return gestorPrincipal;
-    }
-    */
     
     private DefaultTableModel modeloTabla;
     private JScrollPane scrollPanelTabla;
@@ -159,4 +154,6 @@ public class VentanaChat extends JFrame {
     private JButton btnLogOut;
     private JButton btnEnviarMensaje;
     private JButton btnAgregarContacto;
+    
+    private final ControlChat gestorPrincipal;
 }

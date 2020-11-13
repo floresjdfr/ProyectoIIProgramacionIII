@@ -1,5 +1,6 @@
 package chat.vista;
 
+import chat.control.ControlChat;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -25,9 +26,9 @@ import javax.swing.border.TitledBorder;
  */
 public class VentanaRegistro extends JFrame {
     
-    public VentanaRegistro(String titulo) throws HeadlessException {
+    public VentanaRegistro(String titulo, ControlChat gestorPrincipal) throws HeadlessException {
         super(titulo);
-        //this.gestorPrincipal = gestorPrincipal;
+        this.gestorPrincipal = gestorPrincipal;
         configurar();
 
     }
@@ -135,15 +136,11 @@ public class VentanaRegistro extends JFrame {
     public void init() {
         setVisible(true);
     }
-
-    /*
-    public ControlAplicacion getGestorPrincipal() {
-        return gestorPrincipal;
-    }
-     */
     
     private JTextField campoTextoUsuario;
     private JTextField campoTextoNombre;
     private JPasswordField campoTextoPassword;
     private JButton btnLogin;
+    
+    private final ControlChat gestorPrincipal;
 }

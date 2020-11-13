@@ -1,5 +1,6 @@
 package chat.vista;
 
+import chat.control.ControlChat;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -26,9 +27,9 @@ import javax.swing.border.TitledBorder;
  */
 public class VentanaLogIn extends JFrame {
     
-    public VentanaLogIn(String titulo) throws HeadlessException {
+    public VentanaLogIn(String titulo, ControlChat gestorPrincipal) throws HeadlessException {
         super(titulo);
-        //this.gestorPrincipal = gestorPrincipal;
+        this.gestorPrincipal = gestorPrincipal;
         configurar();
 
     }
@@ -109,14 +110,8 @@ public class VentanaLogIn extends JFrame {
 
         c.add(panelCentral, BorderLayout.CENTER);
         
-        btnLogin.addActionListener((ActionEvent e) -> {  
-            if(validaDatos(campoTextoUsuario.getText(), String.valueOf(campoTextoPassword.getPassword()))) {
-                dispose();
-                new VentanaChat("Chat de Texto").init();
-            }
-            else {
-                JOptionPane.showMessageDialog(this,"Usuario y/o Contraseña Incorrectos!");
-            }
+        btnLogin.addActionListener((ActionEvent e) -> {
+            validaDatos();
         });
     }
 
@@ -124,17 +119,21 @@ public class VentanaLogIn extends JFrame {
         setVisible(true);
     }
     
-    public boolean validaDatos(String usuario, String password) {
-        return usuario.equals("admin") && password.equals("admin");
+    public void validaDatos() {
+        String usuario = campoTextoUsuario.getText();
+        String clave = String.valueOf(campoTextoPassword.getPassword());
+        
+        if(gestorPrincipal.verificarDatosUsuario(usuario, clave)) {
+            dispose();
+            new VentanaChat("Chat de Texto", gestorPrincipal).init();
+        }
+        else
+            JOptionPane.showMessageDialog(this,"Usuario y/o Contraseña Incorrectos!");
     }
-
-    /*
-    public ControlAplicacion getGestorPrincipal() {
-        return gestorPrincipal;
-    }
-     */
     
     private JTextField campoTextoUsuario;
     private JPasswordField campoTextoPassword;
     private JButton btnLogin;
+    
+    private final ControlChat gestorPrincipal;
 }
