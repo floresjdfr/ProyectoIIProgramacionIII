@@ -1,31 +1,35 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package chat;
 
-import chat.entidades.Modelo;
-import chat.entidades.Usuario;
-import chat.entidades.dao.UsuarioDAO;
-import java.time.LocalDate;
+import chat.vista.VentanaAplicacion;
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
  * @author Jose David
  */
 public class Chat {
-
-    /**
-     * @param args the command line arguments
-     */
+    
     public static void main(String[] args) {
-        // TODO code application logic here
-        //Usuario marvin = new Usuario("marv02", "Marvin Aguilar", "1234", LocalDate.now());
-        Modelo modelo = new Modelo();
-        //modelo.agregar(marvin);
-        Usuario usuario2 = modelo.recuperar("Jose");
-        System.out.println(usuario2);
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            JFrame.setDefaultLookAndFeelDecorated(true);
+        } catch (ClassNotFoundException
+                | IllegalAccessException
+                | InstantiationException
+                | UnsupportedLookAndFeelException ex) {
+            System.err.printf("Excepción: '%s'%n", ex.getMessage());
+        }
+
+        SwingUtilities.invokeLater(() -> {
+            mostrarInterfaz();
+        });
+    }
+    
+    public static void mostrarInterfaz() {
+        new VentanaAplicacion("Chat").init();
     }
     
 }

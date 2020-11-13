@@ -3,10 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Jose%20David/Escritorio/Proyecto%20II%20Programacion%20III/ProyectoIIProgramacionIII/Usuario/src/chat/entidades/Usuario.java</file>
-            <file>file:/D:/Jose%20David/Escritorio/Proyecto%20II%20Programacion%20III/ProyectoIIProgramacionIII/Usuario/src/chat/entidades/Mensaje.java</file>
-            <file>file:/D:/Jose%20David/Escritorio/Proyecto%20II%20Programacion%20III/ProyectoIIProgramacionIII/Usuario/src/chat/entidades/xml/LocalDateAdapter.java</file>
-            <file>file:/D:/Jose%20David/Escritorio/Proyecto%20II%20Programacion%20III/ProyectoIIProgramacionIII/Usuario/src/chat/Chat.java</file>
+            <file>file:/C:/Users/Marvin%20Aguilar/Documents/GitHub/ProyectoIIProgramacionIII/Chat/src/chat/vista/VentanaLogIn.java</file>
+            <file>file:/C:/Users/Marvin%20Aguilar/Documents/GitHub/ProyectoIIProgramacionIII/Chat/src/chat/vista/VentanaChat.java</file>
+            <file>file:/C:/Users/Marvin%20Aguilar/Documents/GitHub/ProyectoIIProgramacionIII/Chat/src/chat/Chat.java</file>
+            <file>file:/C:/Users/Marvin%20Aguilar/Documents/GitHub/ProyectoIIProgramacionIII/Chat/src/chat/vista/VentanaAplicacion.java</file>
+            <file>file:/C:/Users/Marvin%20Aguilar/Documents/GitHub/ProyectoIIProgramacionIII/Chat/src/chat/vista/VentanaRegistro.java</file>
         </group>
     </open-files>
 </project-private>
