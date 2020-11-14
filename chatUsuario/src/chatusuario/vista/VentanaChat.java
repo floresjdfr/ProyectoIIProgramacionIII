@@ -1,4 +1,4 @@
-package chat.vista;
+package chatusuario.vista;
 
 import chat.control.ControlChat;
 import java.awt.BorderLayout;
