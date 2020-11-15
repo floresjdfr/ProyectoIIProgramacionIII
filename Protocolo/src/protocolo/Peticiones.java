@@ -13,20 +13,20 @@ public class Peticiones {
     public static final String URL_POR_DEFECTO = "localhost";
     public static final int PUERTO_POR_DEFECTO = 1234;
 
-    public static final int LOGIN = 1;
-    public static final int LOGOUT = 2;
-    public static final int ENVIO_MENSAJE = 3;
-    public static final int CONTACTOS_EN_LINEA = 4;
+    public static final String LOGIN = "LOGIN";
+    public static final String LOGOUT = "LOGOUT";
+    public static final String ENVIO_MENSAJE = "ENVIO_MENSAJE";
+    public static final String CONTACTOS_EN_LINEA = "CONTACTOS_EN_LINEA";
 
-    public static final int NOTIFICAR_LOGOUT = 5;
-    public static final int NOTIFICAR_LOGIN = 6;
-    public static final int REGISTRAR_USUARIO = 7;
+    public static final String NOTIFICAR_LOGOUT = "NOTIFICAR_LOGOUT";
+    public static final String NOTIFICAR_LOGIN = "NOTIFICAR_LOGIN";
+    public static final String REGISTRAR_USUARIO = "REGISTRAR_USUARIO";
 
     //public static final int DELIVER = 1;
 
-    //public static final int ERROR_NO_ERROR = 0;
-    //public static final int ERROR_LOGIN = 1;
-    //public static final int ERROR_LOGOUT = 2;
-    //public static final int ERROR_POST = 3;
-    //public static final int ERROR_REGISTER = 4;
+    public static final String NO_ERROR = "NO_ERROR";
+    public static final String ERROR_LOGIN = "ERROR_LOGIN";
+    public static final String ERROR_LOGOUT = "ERROR_LOGOUT";
+    public static final String ERROR_ENVIAR_MENSAJE = "ERROR_ENVIAR_MENSAJE";
+    public static final String ERROR_REGISTRAR = "ERROR_REGISTRAR";
 }
