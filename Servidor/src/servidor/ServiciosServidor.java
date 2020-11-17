@@ -59,6 +59,11 @@ public class ServiciosServidor implements IServicio {
     public void NotificarLogout(String nombreUsuario) {
         servidor.notificarLogout(nombreUsuario);
     }
+    
+    public Usuario registrarUsuario(Usuario usuario){
+        usuarioDAO.agregar(usuario);
+        return usuarioDAO.recuperar(usuario.getNombreUsuario());
+    }
 
     private static IServicio instancia;
 

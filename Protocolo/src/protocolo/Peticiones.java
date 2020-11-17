@@ -15,6 +15,7 @@ public class Peticiones {
 
     public static final String LOGIN = "LOGIN";
     public static final String LOGOUT = "LOGOUT";
+    
     public static final String ENVIO_MENSAJE = "ENVIO_MENSAJE";
     public static final String CONTACTOS_EN_LINEA = "CONTACTOS_EN_LINEA";
 

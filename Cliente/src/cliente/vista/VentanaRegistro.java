@@ -1,6 +1,6 @@
 package cliente.vista;
 
-import chat.control.ControlChat;
+import cliente.Controlador;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -28,7 +28,7 @@ import javax.swing.border.TitledBorder;
  */
 public class VentanaRegistro extends JFrame {
     
-    public VentanaRegistro(String titulo, ControlChat gestorPrincipal) throws HeadlessException {
+    public VentanaRegistro(String titulo, Controlador gestorPrincipal) throws HeadlessException {
         super(titulo);
         this.gestorPrincipal = gestorPrincipal;
         configurar();
@@ -36,7 +36,7 @@ public class VentanaRegistro extends JFrame {
     }
 
     private void configurar() {
-        setIconImage(new ImageIcon(getClass().getResource("/images/chat.png")).getImage());
+        //setIconImage(new ImageIcon(getClass().getResource("/images/chat.png")).getImage());
         ajustarComponentes(getContentPane());
 
         setResizable(false);
@@ -158,7 +158,7 @@ public class VentanaRegistro extends JFrame {
         String nombreCompleto = campoTextoNombre.getText();
         String password = String.valueOf(campoTextoPassword.getPassword());
         
-        gestorPrincipal.agregar(usuario, nombreCompleto, password);
+        gestorPrincipal.registrarNuevoUsuario(usuario, nombreCompleto, password);
         
         JOptionPane.showMessageDialog(this,"Usuario registrado!");
         
@@ -177,5 +177,5 @@ public class VentanaRegistro extends JFrame {
     private JButton btnRegistrarse;
     private JButton btnRegresar;
     
-    private final ControlChat gestorPrincipal;
+    private final Controlador gestorPrincipal;
 }

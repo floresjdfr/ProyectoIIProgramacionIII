@@ -15,14 +15,14 @@ import utiles.LocalDateAdapter;
 //@XmlType(name = "persona", propOrder = {"id", "apellidos", "nombre", "nacimiento"})
 public class Usuario implements Serializable{
 
-    public Usuario(String nombreUsuario, String nombreCompleto, String clave, LocalDate ultimoAcceso, List<Mensaje> enviados, List<Mensaje> recibidos, List<String> contactos) {
+    public Usuario(String nombreUsuario, String nombreCompleto, String clave, LocalDate ultimoAcceso,
+            List<String> contactos, List<Chat> chats) {
         this.nombreUsuario = nombreUsuario;
         this.nombreCompleto = nombreCompleto;
         this.clave = clave;
         this.ultimoAcceso = ultimoAcceso;
-        this.enviados = enviados;
-        this.recibidos = recibidos;
         this.contatos = contactos;
+        this.chats = chats;
     }
 
     public Usuario(String nombreUsuario, String nombreCompleto, String clave, LocalDate ultimoAcceso) {
@@ -30,15 +30,17 @@ public class Usuario implements Serializable{
         this.nombreCompleto = nombreCompleto;
         this.clave = clave;
         this.ultimoAcceso = ultimoAcceso;
-        this.enviados = new ArrayList<>();
-        this.recibidos = new ArrayList<>();
         this.contatos = new ArrayList<>();
+        this.chats = new ArrayList<>();
     }
 
     private Usuario() {
-        this.enviados = new ArrayList<>();
-        this.recibidos = new ArrayList<>();
         this.contatos = new ArrayList<>();
+        this.chats = new ArrayList<>();
+    }
+
+    public Usuario(String nombreUsuario, String clave) {
+        this(nombreUsuario, null, clave, null, null, null);
     }
 
     @Override
@@ -80,22 +82,6 @@ public class Usuario implements Serializable{
         this.ultimoAcceso = ultimoAcceso;
     }
     
-    public List<Mensaje> getEnviados() {
-        return enviados;
-    }
-
-    public void setEnviados(List<Mensaje> enviados) {
-        this.enviados = enviados;
-    }
-
-    public List<Mensaje> getRecibidos() {
-        return recibidos;
-    }
-
-    public void setRecibidos(List<Mensaje> recibidos) {
-        this.recibidos = recibidos;
-    }
-    
     public List<String> getContatos() {
         return contatos;
     }
@@ -104,12 +90,21 @@ public class Usuario implements Serializable{
         this.contatos = contatos;
     }
 
+    public List<Chat> getChats() {
+        return chats;
+    }
+
+    public void setChats(List<Chat> chats) {
+        this.chats = chats;
+    }
+    
+    
+
     private String nombreUsuario;
     private String nombreCompleto;
     private String clave;
     private LocalDate ultimoAcceso;
-    private List<Mensaje> enviados;
-    private List<Mensaje> recibidos;
     private List<String> contatos;
+    private List<Chat> chats;
 }
 

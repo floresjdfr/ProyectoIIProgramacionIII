@@ -22,108 +22,107 @@ import protocolo.Usuario;
  *
  * @author Jose David
  */
-public class Servidor{
+public class Servidor {
 
-    public Servidor(){
-        try{
+    public Servidor() {
+        try {
             serverSocket = new ServerSocket(Peticiones.PUERTO_POR_DEFECTO);
             usuarios = new ArrayList<>();
+        } catch (IOException ex) {
+
         }
-        catch(IOException ex){
-            
-        }    
     }
-    
-    public void iniciarServidor() throws IOException{
+
+    public void iniciarServidor() throws IOException {
         ServiciosServidor serviciosServidor = (ServiciosServidor) ServiciosServidor.obtenerInstancia();
         serviciosServidor.setServidor(this);
         boolean continuar = true;
-        
-        while(continuar){
+
+        while (continuar) {
             Socket socket = serverSocket.accept();
-            
+
             ObjectInputStream entrada = new ObjectInputStream(socket.getInputStream());
             ObjectOutputStream salida = new ObjectOutputStream(socket.getOutputStream());
-            
-            try{
-                String peticion = (String)entrada.readObject();
-                Usuario usuario = (Usuario)entrada.readObject();
-                
-                try{
-                    usuario = serviciosServidor.login(usuario);
-                    salida.writeObject(Peticiones.NO_ERROR);
-                    salida.writeObject(usuario);
-                    salida.flush();
-                    
-                    notificarLogin(usuario.getNombreUsuario());
-                    
-                    UsuarioServidor nuevoUsuarioServidor = new UsuarioServidor(socket, entrada, salida, usuario);
-                    usuarios.add(nuevoUsuarioServidor);
-                    
-                    nuevoUsuarioServidor.iniciar();
-                    
-                    
-                    
-                    
-                } catch (Exception ex) {
-                    salida.writeObject(Peticiones.ERROR_LOGIN);
-                    salida.flush();
+
+            try {
+                String peticion = (String) entrada.readObject();
+                Usuario usuario = (Usuario) entrada.readObject();
+                if (peticion.equals(Peticiones.LOGIN)) {
+                    try {
+                        usuario = serviciosServidor.login(usuario);
+                    } catch (Exception ex) {
+                        Logger.getLogger(Servidor.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } else if (peticion.equals(Peticiones.REGISTRAR_USUARIO)) {
+                    usuario = serviciosServidor.registrarUsuario(usuario);
                 }
-                
-                
+
+                salida.writeObject(Peticiones.NO_ERROR);
+                salida.writeObject(usuario);
+                salida.flush();
+
+                notificarLogin(usuario.getNombreUsuario());
+
+                UsuarioServidor nuevoUsuarioServidor = new UsuarioServidor(socket, entrada, salida, usuario);
+                usuarios.add(nuevoUsuarioServidor);
+
+                nuevoUsuarioServidor.iniciar();
+
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(Servidor.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+
     }
-    
-    public void notificarLogin(String nombreUsuario){
+
+public void notificarLogin(String nombreUsuario) {
         //REVISAAAAAAAAAAAAAAAAR EFICIENCIA
-        for (UsuarioServidor usuario : usuarios){
+        for (UsuarioServidor usuario : usuarios) {
             usuario.notificarLogin(nombreUsuario);
         }
     }
-    
-    public void notificarLogout(String nombreUsuario){
+
+    public void notificarLogout(String nombreUsuario) {
         //REVISAAAAAAAAAAAAAAAAR EFICIENCIA
-        for (UsuarioServidor usuario : usuarios){
+        for (UsuarioServidor usuario : usuarios) {
             usuario.notificarLogout(nombreUsuario);
         }
     }
-    
-    public void borrarUsuarioServidor(Usuario usuario){
-        for (UsuarioServidor usuarioServidor: usuarios ){
-            if (usuarioServidor.getUsuario().equals(usuario)){
-                
+
+    public void borrarUsuarioServidor(Usuario usuario) {
+        for (UsuarioServidor usuarioServidor : usuarios) {
+            if (usuarioServidor.getUsuario().equals(usuario)) {
+
                 usuarios.remove(usuarioServidor);
-                
+
                 usuarioServidor.detener();
-                
+
             }
         }
     }
-    
-    
+
     public void enviarMensaje(Mensaje message) {
         //REVISAAAAAAAAAAAAR
         for (UsuarioServidor usuario : usuarios) {
             usuario.enviarMensaje(message);
         }
     }
-    
-    public void contactosEnLinea(String solicitante, List<String> listContactos){
+
+    public void contactosEnLinea(String solicitante, List<String> listContactos) {
         List<String> contactosEnLinea = new ArrayList<>();
         UsuarioServidor usuarioServidorSolicitante = null;
-        for(UsuarioServidor usuario:usuarios){
-            if(listContactos.contains(usuario.getUsuario().getNombreUsuario()))
+        for (UsuarioServidor usuario : usuarios) {
+            if (listContactos.contains(usuario.getUsuario().getNombreUsuario())) {
                 contactosEnLinea.add(usuario.getUsuario().getNombreUsuario());
-            if(usuario.getUsuario().getNombreUsuario().equals(solicitante))
+            }
+            if (usuario.getUsuario().getNombreUsuario().equals(solicitante)) {
                 usuarioServidorSolicitante = usuario;
+            }
         }
         usuarioServidorSolicitante.obtenerContacotsEnLinea(contactosEnLinea);
-        
+
     }
-    
+
     ServerSocket serverSocket;
     ArrayList<UsuarioServidor> usuarios;
 

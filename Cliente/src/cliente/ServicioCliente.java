@@ -10,6 +10,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import protocolo.IServicio;
 import protocolo.Mensaje;
 import protocolo.Peticiones;
@@ -145,6 +147,16 @@ public class ServicioCliente implements IServicio, Runnable {
     public void NotificarLogout(String nombreUsuario) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         //Falta
+    }
+    
+    
+    public void registrarUsuario(Usuario usuario){
+        try {
+            salida.writeObject(Peticiones.REGISTRAR_USUARIO);
+            salida.writeObject(usuario);
+            salida.flush();
+        } catch (IOException ex) {
+        }
     }
 
 

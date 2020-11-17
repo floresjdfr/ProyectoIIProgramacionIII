@@ -1,9 +1,7 @@
 package cliente.vista;
 
-import chat.control.ControlChat;
-import com.privatejgoodies.forms.layout.FormLayout;
+import cliente.Controlador;
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -29,8 +27,8 @@ import javax.swing.border.TitledBorder;
  * @author Marvin Aguilar
  */
 public class VentanaLogIn extends JFrame {
-    
-    public VentanaLogIn(String titulo, ControlChat gestorPrincipal) throws HeadlessException {
+
+    public VentanaLogIn(String titulo, Controlador gestorPrincipal) throws HeadlessException {
         super(titulo);
         this.gestorPrincipal = gestorPrincipal;
         configurar();
@@ -38,7 +36,7 @@ public class VentanaLogIn extends JFrame {
     }
 
     private void configurar() {
-        setIconImage(new ImageIcon(getClass().getResource("/images/chat.png")).getImage());
+        //setIconImage(new ImageIcon(getClass().getResource("/images/chat.png")).getImage());
         ajustarComponentes(getContentPane());
 
         setResizable(false);
@@ -55,25 +53,25 @@ public class VentanaLogIn extends JFrame {
 
         JPanel panelCentral = new JPanel();
         panelCentral.setLayout(new GridBagLayout());
-        
+
         panelCentral.setBorder(BorderFactory.createTitledBorder(
                 BorderFactory.createEtchedBorder(), "Log In", TitledBorder.LEFT, TitledBorder.DEFAULT_POSITION));
-        
+
         campoTextoUsuario = new JTextField();
         campoTextoUsuario.setPreferredSize(new Dimension(120, 20));
-        
+
         campoTextoPassword = new JPasswordField();
         campoTextoPassword.setPreferredSize(new Dimension(120, 20));
-        
+
         btnLogin = new JButton("Log In");
         btnLogin.setPreferredSize(new Dimension(120, 30));
-        
+
         btnRegresar = new JButton("Regresar");
         btnRegresar.setPreferredSize(new Dimension(120, 30));
-        
+
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);
-        
+
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.weightx = 0;
@@ -81,7 +79,7 @@ public class VentanaLogIn extends JFrame {
         gbc.anchor = GridBagConstraints.FIRST_LINE_START;
         gbc.fill = GridBagConstraints.NONE;
         panelCentral.add(new JLabel("Usuario: "), gbc);
-        
+
         gbc.gridx = 1;
         gbc.gridy = 0;
         gbc.weightx = 0;
@@ -89,7 +87,7 @@ public class VentanaLogIn extends JFrame {
         gbc.anchor = GridBagConstraints.CENTER;
         gbc.fill = GridBagConstraints.NONE;
         panelCentral.add(campoTextoUsuario, gbc);
-        
+
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.weightx = 0;
@@ -97,7 +95,7 @@ public class VentanaLogIn extends JFrame {
         gbc.anchor = GridBagConstraints.FIRST_LINE_START;
         gbc.fill = GridBagConstraints.NONE;
         panelCentral.add(new JLabel("Password: "), gbc);
-        
+
         gbc.gridx = 1;
         gbc.gridy = 1;
         gbc.weightx = 0;
@@ -105,7 +103,7 @@ public class VentanaLogIn extends JFrame {
         gbc.anchor = GridBagConstraints.CENTER;
         gbc.fill = GridBagConstraints.NONE;
         panelCentral.add(campoTextoPassword, gbc);
-        
+
         gbc.gridx = 1;
         gbc.gridy = 2;
         gbc.weightx = 0;
@@ -115,18 +113,21 @@ public class VentanaLogIn extends JFrame {
         panelCentral.add(btnLogin, gbc);
 
         c.add(panelCentral, BorderLayout.CENTER);
-        
+
         JPanel panelInferior = new JPanel();
         panelInferior.setLayout(new FlowLayout(FlowLayout.RIGHT));
-        
+
         panelInferior.add(btnRegresar);
-        
+
         c.add(panelInferior, BorderLayout.PAGE_END);
-        
+
         btnLogin.addActionListener((ActionEvent e) -> {
-            validaDatos();
+            try {
+                validaDatos();
+            } catch (Exception ex) {
+            }
         });
-        
+
         btnRegresar.addActionListener((ActionEvent e) -> {
             volverInicio();
         });
@@ -135,28 +136,28 @@ public class VentanaLogIn extends JFrame {
     public void init() {
         setVisible(true);
     }
-    
-    public void validaDatos() {
+
+    public void validaDatos() throws Exception {
         String usuario = campoTextoUsuario.getText();
         String clave = String.valueOf(campoTextoPassword.getPassword());
-        
-        if(gestorPrincipal.verificarDatosUsuario(usuario, clave)) {
+
+        if (gestorPrincipal.verificarDatosUsuario(usuario, clave)) {
             dispose();
             new VentanaChat("Chat de Texto", gestorPrincipal).init();
+        } else {
+            JOptionPane.showMessageDialog(this, "Usuario y/o Contraseña Incorrectos!");
         }
-        else
-            JOptionPane.showMessageDialog(this,"Usuario y/o Contraseña Incorrectos!");
     }
-    
+
     public void volverInicio() {
         dispose();
         new VentanaAplicacion("Chat", gestorPrincipal).init();
     }
-    
+
     private JTextField campoTextoUsuario;
     private JPasswordField campoTextoPassword;
     private JButton btnLogin;
     private JButton btnRegresar;
-    
-    private final ControlChat gestorPrincipal;
+
+    private final Controlador gestorPrincipal;
 }

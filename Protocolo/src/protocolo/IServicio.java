@@ -21,4 +21,5 @@ public interface IServicio {
     public void verificaContactosEnLinea(String nombreUsuario, List<String> listaContactos);
 
     public void NotificarLogout(String nombreUsuario);
+    
 }
