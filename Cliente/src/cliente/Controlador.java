@@ -1,8 +1,10 @@
 package cliente;
 
-import java.io.IOException;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Observer;
+import protocolo.Chat;
+import protocolo.Mensaje;
 import protocolo.Usuario;
 
 /**
@@ -12,13 +14,13 @@ import protocolo.Usuario;
 public class Controlador {
     public Controlador() {
         this.servicioCliente = (ServicioCliente) ServicioCliente.obtenerInstancia();
-        this.servicioCliente.setControlador(this);
+        this.servicioCliente.setContolador(this);
     }
 
     public Controlador(Modelo modelo) {
         this.modelo = modelo;
         this.servicioCliente = (ServicioCliente) ServicioCliente.obtenerInstancia();
-        this.servicioCliente.setControlador(this);
+        this.servicioCliente.setContolador(this);
     }
 
     public Modelo getModelo() {
@@ -64,16 +66,44 @@ public class Controlador {
         return modelo.getNombreUsuario();
     }
     
-    public void agregarContacto(String usuario){
+    public String agregarContacto(String usuario){
         
-        servicioCliente.agregarContacto(usuario);
-        for (String contacto: modelo.getUsuarioActual().getContatos()){
-            System.out.print(contacto);
-        }
-        
+        usuario = servicioCliente.agregarContacto(usuario);
+        if (usuario != null)
+            modelo.agregarContacto(usuario);
+        return usuario;
+    }
+    
+    public void enviarMensaje(String mensaje) {
+        Mensaje msj = new Mensaje(1111, modelo.getNombreUsuario(), modelo.obtenerContactoActual(), mensaje, LocalDate.now(), true);
+        servicioCliente.enviarMensaje(msj);
+        modelo.enviarMensaje(msj);
+    }
+    
+    public List<String> obtenerContactos() {
+        return modelo.obtenerContactos();
     }
     
     private Modelo modelo;
     private final ServicioCliente servicioCliente;
+
+    public void seleccionarChatUsuario(String usuario) {
+        //Se supone que tiene que buscar el chat en el XML o base de datos
+        Chat chatActual = new Chat(usuario);
+        modelo.setChatActual(chatActual);
+        
+    }
+    
+    public String obtenerMensajesChatActual(){
+        return modelo.obtenerMensajesChatActual();
+    }
+    
+    public void recibirMensaje(Mensaje mensaje){
+        modelo.recibirMensaje(mensaje);
+    }
+
+    
+
+    
 
 }

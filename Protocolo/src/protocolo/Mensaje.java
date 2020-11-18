@@ -24,6 +24,13 @@ public class Mensaje implements Serializable  {
     public Mensaje() {
     }
 
+    @Override
+    public String toString() {
+        return "Mensaje{" + "secuencia=" + secuencia + ", sender=" + sender + ", reciever=" + reciever + ", message=" + message + ", fecha=" + fecha + ", enviado=" + enviado + '}';
+    }
+    
+    
+
     public String getSender() {
         return sender;
     }

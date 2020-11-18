@@ -1,5 +1,6 @@
 package protocolo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,6 +14,7 @@ public class Chat {
 
     public Chat(String contacto) {
         this.contacto = contacto;
+        mensajes = new ArrayList<>();
     }
 
     public Chat(String contacto, List<Mensaje> mensajes) {
@@ -34,6 +36,10 @@ public class Chat {
 
     public void setMensajes(List<Mensaje> mensajes) {
         this.mensajes = mensajes;
+    }
+    
+    public void agregarMensaje(Mensaje mensaje){
+        mensajes.add(mensaje);
     }
     
     

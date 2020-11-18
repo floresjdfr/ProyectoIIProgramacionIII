@@ -8,6 +8,7 @@ package cliente;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import static java.lang.Thread.sleep;
 import java.net.Socket;
 import java.util.List;
 import java.util.logging.Level;
@@ -53,11 +54,13 @@ public class ServicioCliente implements IServicio, Runnable {
 
             try {
                 respuestaServidor = (String) entrada.readObject();
+                //System.out.print(respuestaServidor);
 
                 switch (respuestaServidor) {
                     case Peticiones.ENVIO_MENSAJE:
                         try {
                             Mensaje mensaje = (Mensaje) entrada.readObject();
+                            recibirMensaje(mensaje);
 
                         } catch (ClassNotFoundException ex) {
                         }
@@ -72,11 +75,11 @@ public class ServicioCliente implements IServicio, Runnable {
                     case Peticiones.NOTIFICAR_LOGIN:
                         String usuarioLoggedIn = (String) entrada.readObject();
                         break;
+                    
                     case Peticiones.AGREGAR_CONTACTO:
                         String usuario = (String) entrada.readObject();
-                        if (usuario != null){
-                            controlador.agregarContacto(usuario);
-                        }
+                        if (usuario != null)
+                            contactoRecibido = usuario;
                         break;
                 }
                 salida.flush();
@@ -190,26 +193,50 @@ public class ServicioCliente implements IServicio, Runnable {
         }
     }
 
-    public void agregarContacto(String usuario) {
+    public String agregarContacto(String usuario) {
         try {
+
             salida.writeObject(Peticiones.AGREGAR_CONTACTO);
             salida.writeObject(usuario);
             salida.flush();
+            
+            
+            sleep(500);//Espera la respuesta de servidor
+            
+            if (contactoRecibido != null){
+                usuario = contactoRecibido;
+                contactoRecibido = null;
+                return usuario;
+            }
+            return null;
 
-        } catch (IOException ex) {
-            System.err.println(ex.getMessage());
+        } catch (IOException | InterruptedException ex) {
+            return null;
         }
     }
-
-    public void setControlador(Controlador controlador) {
-        this.controlador = controlador;
+    
+    private void recibirMensaje(Mensaje mensaje) {
+        Thread hilo = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                controlador.recibirMensaje(mensaje);
+            }
+        });
+        hilo.start();
     }
     
+    public void setContolador(Controlador controlador){
+        this.controlador = controlador;
+    }
+
     private static IServicio instancia;
     private Socket socket;
     private ObjectInputStream entrada;
     private ObjectOutputStream salida;
     private Thread hiloControl;
     private boolean continuar = true;
+    private String contactoRecibido = null;
     private Controlador controlador;
+
+   
 }

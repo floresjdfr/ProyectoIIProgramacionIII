@@ -49,7 +49,7 @@ public class Servidor {
                 Usuario usuario = (Usuario) entrada.readObject();
                 if (peticion.equals(Peticiones.LOGIN)) {
                     try {
-                        
+
                         usuario = serviciosServidor.login(usuario);
                     } catch (Exception ex) {
                         usuario = null;
@@ -69,8 +69,7 @@ public class Servidor {
                     usuarios.add(nuevoUsuarioServidor);
 
                     nuevoUsuarioServidor.iniciar();
-                }
-                else{
+                } else {
                     salida.writeObject(Peticiones.ERROR_LOGIN);
                     salida.writeObject(usuario);
                     salida.flush();
@@ -110,9 +109,14 @@ public class Servidor {
     }
 
     public void enviarMensaje(Mensaje message) {
-        //REVISAAAAAAAAAAAAR
+        String destino = message.getReciever();
+        System.out.println(message);
+        UsuarioServidor user;
+
         for (UsuarioServidor usuario : usuarios) {
-            usuario.enviarMensaje(message);
+            if (usuario.getUsuario().getNombreUsuario().equals(destino)) {
+                usuario.enviarMensaje(message);
+            }
         }
     }
 

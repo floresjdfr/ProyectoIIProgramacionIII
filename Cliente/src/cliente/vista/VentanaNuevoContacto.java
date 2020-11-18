@@ -9,7 +9,6 @@ import cliente.Controlador;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -22,7 +21,6 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
@@ -106,10 +104,13 @@ public class VentanaNuevoContacto extends JFrame{
     
     public void agregarContacto() {
         String usuario = campoTextoUsuario.getText();
-        gestorPrincipal.agregarContacto(usuario);
-        
-        JOptionPane.showMessageDialog(this,"Contacto agregado!");
-        dispose();
+        usuario = gestorPrincipal.agregarContacto(usuario);
+        if (usuario != null){
+            JOptionPane.showMessageDialog(this,"Contacto agregado!");
+            dispose();
+        }
+        else
+            JOptionPane.showMessageDialog(this,"Nombre de usuario no existe!");
     }
     
     private JTextField campoTextoUsuario;

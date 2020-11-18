@@ -10,6 +10,11 @@ import java.awt.GridBagLayout;
 import java.awt.HeadlessException;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -32,12 +37,14 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Marvin Aguilar
  */
-public class VentanaChat extends JFrame {
+public class VentanaChat extends JFrame implements Observer{
     
     public VentanaChat(String titulo, Controlador gestorPrincipal) throws HeadlessException {
         super(titulo);
         this.gestorPrincipal = gestorPrincipal;
+        this.gestorPrincipal.registrarObservador(this);
         configurar();
+        actualizarContactos();
 
     }
 
@@ -160,6 +167,16 @@ public class VentanaChat extends JFrame {
         btnAgregarContacto.addActionListener((ActionEvent e) -> {
             new VentanaNuevoContacto("Nuevo Contacto", gestorPrincipal).init();
         });
+        
+        tablaListaContactos.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseClicked(MouseEvent evt) {
+                if (evt.getClickCount() == 2) {
+                    String usuario = obtenerUsuarioTabla();
+                    seleccionarChatUsuario(usuario);
+                }
+            }
+        });
     }
 
     public void init() {
@@ -168,16 +185,48 @@ public class VentanaChat extends JFrame {
     
     public void enviarMensaje() {
         String mensaje = campoMensaje.getText();
-        
-        campoChat.append(mensaje + "\n");
-        
         campoMensaje.setText(null);
+        
+        gestorPrincipal.enviarMensaje(mensaje);
     }
     
     public void logOut() {
         gestorPrincipal.logout();
         dispose();
         new VentanaAplicacion("Chat", gestorPrincipal).init();
+    }
+    
+    private void actualizarContactos(){
+        modeloTabla.setRowCount(0);
+        List<String> contactos = gestorPrincipal.obtenerContactos();
+        for (String contacto:contactos){
+            Object[] objectoAgregado = {contacto, true};
+            modeloTabla.addRow(objectoAgregado);
+        }
+    }
+    
+    private String obtenerUsuarioTabla(){
+        int filaSeleccionada = tablaListaContactos.getSelectedRow();
+        return (String) modeloTabla.getValueAt(filaSeleccionada, 0);
+        
+    }
+    
+    private void seleccionarChatUsuario(String usuario){
+        gestorPrincipal.seleccionarChatUsuario(usuario);
+    }
+    
+    private String obtenerMensajesChatActual(){
+        return gestorPrincipal.obtenerMensajesChatActual();
+    }
+    
+    private void actualizarMensajes(){
+        String mensajes = obtenerMensajesChatActual();
+        campoChat.setText(mensajes);
+    }
+    @Override
+    public void update(Observable o, Object arg) {
+        actualizarContactos();
+        actualizarMensajes();
     }
     
     private DefaultTableModel modeloTabla;
@@ -197,4 +246,6 @@ public class VentanaChat extends JFrame {
     private JLabel labelLoggedUser;
     
     private final Controlador gestorPrincipal;
+
+    
 }
