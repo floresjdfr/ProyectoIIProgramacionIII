@@ -33,7 +33,7 @@ public class ServicioCliente implements IServicio, Runnable {
         }
         return instancia;
     }
-    
+
     public void iniciar() {
         hiloControl = new Thread(this);
         if (hiloControl != null) {
@@ -41,11 +41,11 @@ public class ServicioCliente implements IServicio, Runnable {
             hiloControl.start();
         }
     }
-    
+
     public void stopThread() {
         continuar = false;
     }
-    
+
     @Override
     public void run() {
         String respuestaServidor;
@@ -82,9 +82,9 @@ public class ServicioCliente implements IServicio, Runnable {
     }
 
     public void conectarSocket() throws IOException {
-        socket = new Socket(Peticiones.URL_POR_DEFECTO, Peticiones.PUERTO_POR_DEFECTO);
-        entrada = new ObjectInputStream(socket.getInputStream());
+        socket = new Socket("localhost", 1234);
         salida = new ObjectOutputStream(socket.getOutputStream());
+        entrada = new ObjectInputStream(socket.getInputStream());
     }
 
     public void desconectarSocket() throws IOException {
@@ -148,17 +148,29 @@ public class ServicioCliente implements IServicio, Runnable {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         //Falta
     }
-    
-    
-    public void registrarUsuario(Usuario usuario){
+
+    @Override
+    public Usuario registrarUsuario(Usuario usuario) throws IOException {
+
+        conectarSocket();
         try {
             salida.writeObject(Peticiones.REGISTRAR_USUARIO);
             salida.writeObject(usuario);
             salida.flush();
-        } catch (IOException ex) {
+
+            String response = (String) entrada.readObject();
+            if (response.equals(Peticiones.NO_ERROR)) {
+                Usuario user = (Usuario) entrada.readObject();
+                this.iniciar();
+                return user;
+            } else {
+                desconectarSocket();
+                throw new Exception("No remote user");
+            }
+        } catch (Exception ex) {
+            return null;
         }
     }
-
 
     private static IServicio instancia;
     private Socket socket;

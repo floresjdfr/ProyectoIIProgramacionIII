@@ -60,6 +60,7 @@ public class ServiciosServidor implements IServicio {
         servidor.notificarLogout(nombreUsuario);
     }
     
+    @Override
     public Usuario registrarUsuario(Usuario usuario){
         usuarioDAO.agregar(usuario);
         return usuarioDAO.recuperar(usuario.getNombreUsuario());

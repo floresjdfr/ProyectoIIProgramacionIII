@@ -22,4 +22,6 @@ public interface IServicio {
 
     public void NotificarLogout(String nombreUsuario);
     
+    public Usuario registrarUsuario(Usuario usuario)throws Exception;
+    
 }

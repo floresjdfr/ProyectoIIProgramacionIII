@@ -1,5 +1,6 @@
 package cliente;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Observer;
 import java.util.logging.Level;
@@ -44,9 +45,9 @@ public class Controlador {
         
     }
     
-    public void registrarNuevoUsuario(String usuario, String nombreCompleto, String password){
+    public void registrarNuevoUsuario(String usuario, String nombreCompleto, String password) throws IOException{
         Usuario user = new Usuario(usuario, nombreCompleto, password, LocalDate.now());
-        servicioCliente.registrarUsuario(user);
+        user = servicioCliente.registrarUsuario(user);
         try {
             user = servicioCliente.login(user);
         } catch (Exception ex) {}
