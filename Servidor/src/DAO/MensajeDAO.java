@@ -40,8 +40,7 @@ public class MensajeDAO implements DAO<Integer, Mensaje> {
                         rs.getString("usuario_emisor"),
                         rs.getString("usuario_receptor"),
                         rs.getString("texto"),
-                        rs.getDate("fecha").toLocalDate(),
-                        rs.getBoolean("enviado")
+                        rs.getDate("fecha").toLocalDate()
                 ));
             }
         } catch (SQLException ex) {
@@ -60,7 +59,6 @@ public class MensajeDAO implements DAO<Integer, Mensaje> {
             stm.setString(3, nuevoMensaje.getReciever());
             stm.setDate(4, Date.valueOf(nuevoMensaje.getFecha()));
             stm.setString(5, nuevoMensaje.getMessage());
-            stm.setBoolean(6, nuevoMensaje.isEnviado());
             if (stm.executeUpdate() != 1) {
                 throw new IllegalArgumentException(
                         String.format("No se pudo agregar el registro: '%s'",
@@ -91,8 +89,7 @@ public class MensajeDAO implements DAO<Integer, Mensaje> {
                                 rs.getString("usuario_emisor"),
                                 rs.getString("usuario_receptor"),
                                 rs.getString("texto"),
-                                rs.getDate("fecha").toLocalDate(),
-                                rs.getBoolean("enviado")
+                                rs.getDate("fecha").toLocalDate()
                         );
                     }
                 }
@@ -113,7 +110,6 @@ public class MensajeDAO implements DAO<Integer, Mensaje> {
             stm.setString(3, mensaje.getReciever());
             stm.setDate(4, Date.valueOf(mensaje.getFecha()));
             stm.setString(5, mensaje.getMessage());
-            stm.setBoolean(6, mensaje.isEnviado());
             
             if (stm.executeUpdate() != 1) {
                 throw new IllegalArgumentException(

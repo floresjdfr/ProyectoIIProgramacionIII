@@ -54,7 +54,6 @@ public class ServicioCliente implements IServicio, Runnable {
 
             try {
                 respuestaServidor = (String) entrada.readObject();
-                //System.out.print(respuestaServidor);
 
                 switch (respuestaServidor) {
                     case Peticiones.ENVIO_MENSAJE:

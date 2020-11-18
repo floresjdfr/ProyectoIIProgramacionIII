@@ -2,23 +2,21 @@ package protocolo;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.*;
 
 /**
  *
  * @author Jose David
  */
-@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "Mensaje")
 public class Mensaje implements Serializable  {
 
-    public Mensaje(int sentencia, String sender, String reciever, String message, LocalDate fecha, Boolean enviado) {
+    public Mensaje(int sentencia, String sender, String reciever, String message, LocalDate fecha) {
         this.secuencia = sentencia;
         this.sender = sender;
         this.reciever = reciever;
         this.message = message;
         this.fecha = fecha;
-        this.enviado = enviado;
     }
 
     public Mensaje() {
@@ -35,6 +33,7 @@ public class Mensaje implements Serializable  {
         return sender;
     }
 
+    @XmlElement(name = "Sender")
     public void setSender(String sender) {
         this.sender = sender;
     }
@@ -43,6 +42,7 @@ public class Mensaje implements Serializable  {
         return reciever;
     }
 
+    @XmlElement(name = "Reciever")
     public void setReciever(String reciever) {
         this.reciever = reciever;
     }
@@ -51,6 +51,7 @@ public class Mensaje implements Serializable  {
         return message;
     }
 
+    @XmlElement(name = "Mensaje")
     public void setMessage(String message) {
         this.message = message;
     }
@@ -59,6 +60,8 @@ public class Mensaje implements Serializable  {
         return secuencia;
     }
 
+    
+    @XmlElement(name = "Secuencia")
     public void setSecuencia(int secuencia) {
         this.secuencia = secuencia;
     }
@@ -67,16 +70,9 @@ public class Mensaje implements Serializable  {
         return fecha;
     }
 
+    @XmlElement(name = "Fecha")
     public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
-    }
-
-    public Boolean isEnviado() {
-        return enviado;
-    }
-
-    public void setEnviado(Boolean enviado) {
-        this.enviado = enviado;
     }
     
     private int secuencia;
@@ -84,6 +80,5 @@ public class Mensaje implements Serializable  {
     private String reciever;
     private String message;
     private LocalDate fecha;
-    private Boolean enviado;
   
 }

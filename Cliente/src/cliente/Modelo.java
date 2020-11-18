@@ -55,12 +55,12 @@ public class Modelo extends Observable {
 
     public void enviarMensaje(Mensaje mensaje) {
         chatActual.agregarMensaje(mensaje);
-        
+
         setChanged();
         notifyObservers();
     }
-    
-    public String obtenerContactoActual(){
+
+    public String obtenerContactoActual() {
         return chatActual.getContacto();
     }
 
@@ -79,12 +79,31 @@ public class Modelo extends Observable {
         return null;
     }
 
+    public void seleccionarNuevoChat(String nombreContacto) {
+        Chat chat = usuarioActual.buscarChat(nombreContacto);
+        if (chat != null) {
+            actualizarChat();
+            chatActual = chat;
+        }
+        else{
+            chat = new Chat(nombreContacto);
+            actualizarChat();
+            chatActual = chat;
+        }
+        setChanged();
+        notifyObservers();
+    }
+
+    public void actualizarChat() {
+        usuarioActual.actualizarChat(chatActual);
+    }
+
     private Usuario usuarioActual;
     private Chat chatActual;
 
     void recibirMensaje(Mensaje mensaje) {
         chatActual.agregarMensaje(mensaje);
-        
+
         setChanged();
         notifyObservers();
     }

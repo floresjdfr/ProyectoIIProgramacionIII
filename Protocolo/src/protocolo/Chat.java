@@ -2,14 +2,18 @@ package protocolo;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.bind.annotation.*;
 
 /**
  *
  * @author Jose David
  */
+
+@XmlRootElement(name = "Chat")
 public class Chat {
 
     public Chat() {
+        mensajes = new ArrayList<>();
     }
 
     public Chat(String contacto) {
@@ -26,6 +30,7 @@ public class Chat {
         return contacto;
     }
 
+    @XmlElement(name = "Contacto")
     public void setContacto(String contacto) {
         this.contacto = contacto;
     }
@@ -34,6 +39,8 @@ public class Chat {
         return mensajes;
     }
 
+    @XmlElementWrapper(name = "Mensajes")
+    @XmlElement(name = "Mensaje")
     public void setMensajes(List<Mensaje> mensajes) {
         this.mensajes = mensajes;
     }

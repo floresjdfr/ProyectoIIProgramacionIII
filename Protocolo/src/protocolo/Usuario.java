@@ -1,9 +1,10 @@
-
 package protocolo;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.bind.annotation.*;
 import utiles.LocalDateAdapter;
 
 /**
@@ -11,9 +12,8 @@ import utiles.LocalDateAdapter;
  * @author Jose David Flores
  * @author Marvin Aguilar
  */
-
-//@XmlType(name = "persona", propOrder = {"id", "apellidos", "nombre", "nacimiento"})
-public class Usuario implements Serializable{
+@XmlRootElement(name = "Usuario")
+public class Usuario implements Serializable {
 
     public Usuario(String nombreUsuario, String nombreCompleto, String clave, LocalDate ultimoAcceso,
             List<String> contactos, List<Chat> chats) {
@@ -34,7 +34,7 @@ public class Usuario implements Serializable{
         this.chats = new ArrayList<>();
     }
 
-    private Usuario() {
+    public Usuario() {
         this.contactos = new ArrayList<>();
         this.chats = new ArrayList<>();
     }
@@ -54,6 +54,7 @@ public class Usuario implements Serializable{
         return nombreUsuario;
     }
 
+    @XmlElement(name = "Nombre_Usuario")
     public void setNombreUsuario(String nombreUsuario) {
         this.nombreUsuario = nombreUsuario;
     }
@@ -62,6 +63,7 @@ public class Usuario implements Serializable{
         return nombreCompleto;
     }
 
+    @XmlTransient
     public void setNombreCompleto(String nombreCompleto) {
         this.nombreCompleto = nombreCompleto;
     }
@@ -70,6 +72,7 @@ public class Usuario implements Serializable{
         return clave;
     }
 
+    @XmlTransient
     public void setClave(String clave) {
         this.clave = clave;
     }
@@ -78,14 +81,16 @@ public class Usuario implements Serializable{
         return ultimoAcceso;
     }
 
+    @XmlTransient
     public void setUltimoAcceso(LocalDate ultimoAcceso) {
         this.ultimoAcceso = ultimoAcceso;
     }
-    
+
     public List<String> getContatos() {
         return contactos;
     }
 
+    @XmlElementWrapper(name = "Contactos")
     public void setContatos(List<String> contatos) {
         this.contactos = contatos;
     }
@@ -94,12 +99,34 @@ public class Usuario implements Serializable{
         return chats;
     }
 
+    @XmlElementWrapper(name = "Chats")
+    @XmlElement(name = "Chat")
     public void setChats(List<Chat> chats) {
         this.chats = chats;
     }
-    
-    public void agregarContacto(String usuario){
+
+    public void agregarContacto(String usuario) {
         contactos.add(usuario);
+    }
+
+    public void actualizarChat(Chat chat) {
+        if (chat != null) {
+            Chat resultado = this.buscarChat(chat.getContacto());
+            if (resultado != null) {
+                chats.remove(resultado);
+            }
+            chats.add(chat);
+        }
+
+    }
+
+    public Chat buscarChat(String usuarioContacto) {
+        for (Chat chat : chats) {
+            if (chat.getContacto().equals(usuarioContacto)) {
+                return chat;
+            }
+        }
+        return null;
     }
 
     private String nombreUsuario;
@@ -109,4 +136,3 @@ public class Usuario implements Serializable{
     private List<String> contactos;
     private List<Chat> chats;
 }
-

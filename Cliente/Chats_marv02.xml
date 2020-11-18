@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Usuario>
+    <Chats>
+        <Chat>
+            <Contacto>jd</Contacto>
+            <Mensajes>
+                <Mensaje>
+                    <Fecha/>
+                    <Mensaje>Hola marvin</Mensaje>
+                    <Reciever>marv02</Reciever>
+                    <Secuencia>1111</Secuencia>
+                    <Sender>jd</Sender>
+                </Mensaje>
+                <Mensaje>
+                    <Fecha/>
+                    <Mensaje>Hola Jose</Mensaje>
+                    <Reciever>jd</Reciever>
+                    <Secuencia>1111</Secuencia>
+                    <Sender>marv02</Sender>
+                </Mensaje>
+            </Mensajes>
+        </Chat>
+    </Chats>
+    <Contactos>
+        <contatos>jd</contatos>
+        <contatos>Mico</contatos>
+    </Contactos>
+    <Nombre_Usuario>marv02</Nombre_Usuario>
+</Usuario>

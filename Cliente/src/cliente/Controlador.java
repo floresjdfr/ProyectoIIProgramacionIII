@@ -1,5 +1,6 @@
 package cliente;
 
+import XML.Xml;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Observer;
@@ -40,6 +41,8 @@ public class Controlador {
         user = servicioCliente.login(user);
         if (user != null){
             modelo.setUsuarioActual(user);
+            Xml.obtieneProductosXML(user, modelo);
+            
             return true;
         }
         else
@@ -58,6 +61,7 @@ public class Controlador {
     
     public void logout(){
         servicioCliente.logout(modelo.getUsuarioActual());
+        Xml.guardaUsuarioXML(modelo);
         modelo.setChatActual(null);
         modelo.setUsuarioActual(null);
     }
@@ -75,7 +79,7 @@ public class Controlador {
     }
     
     public void enviarMensaje(String mensaje) {
-        Mensaje msj = new Mensaje(1111, modelo.getNombreUsuario(), modelo.obtenerContactoActual(), mensaje, LocalDate.now(), true);
+        Mensaje msj = new Mensaje(1111, modelo.getNombreUsuario(), modelo.obtenerContactoActual(), mensaje, LocalDate.now());
         servicioCliente.enviarMensaje(msj);
         modelo.enviarMensaje(msj);
     }
@@ -89,8 +93,8 @@ public class Controlador {
 
     public void seleccionarChatUsuario(String usuario) {
         //Se supone que tiene que buscar el chat en el XML o base de datos
-        Chat chatActual = new Chat(usuario);
-        modelo.setChatActual(chatActual);
+        
+        modelo.seleccionarNuevoChat(usuario);
         
     }
     
