@@ -100,6 +100,25 @@ public class UsuarioDAO implements DAO<String, Usuario> {
         }
         return resultado;
     }
+    
+    public String recuperarNombreUsuario(String usuario){
+        String resultado = null;
+        try {
+            try (Connection cnx = bd.getConnection();
+                    PreparedStatement stm = cnx.prepareStatement(UsuarioCRUD.CMD_RECUPERAR)) {
+                stm.clearParameters();
+                stm.setString(1, usuario);
+                try (ResultSet rs = stm.executeQuery()) {
+                    if (rs.next()) {
+                        resultado = rs.getString("nombre");
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            System.err.printf("Excepción: '%s'%n", ex.getMessage());
+        }
+        return resultado;
+    }
 
     @Override
     public void actualizar(String nombre, Usuario usuario) {

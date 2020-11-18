@@ -72,6 +72,10 @@ public class ServicioCliente implements IServicio, Runnable {
                     case Peticiones.NOTIFICAR_LOGIN:
                         String usuarioLoggedIn = (String) entrada.readObject();
                         break;
+                    case Peticiones.AGREGAR_CONTACTO:
+                        String usuario = (String) entrada.readObject();
+                        System.out.print(usuario);
+                        break;
                 }
                 salida.flush();
                 //PROBAR SI ES NECESARIO
@@ -94,7 +98,7 @@ public class ServicioCliente implements IServicio, Runnable {
     }
 
     @Override
-    public Usuario login(Usuario usuario){
+    public Usuario login(Usuario usuario) {
         try {
             conectarSocket();
         } catch (IOException ex) {
@@ -113,13 +117,13 @@ public class ServicioCliente implements IServicio, Runnable {
                 desconectarSocket();
                 throw new Exception("No remote user");
             }
-        }catch (Exception ex) {
+        } catch (Exception ex) {
             return null;
         }
     }
 
     @Override
-    public void logout(Usuario usuario){
+    public void logout(Usuario usuario) {
         try {
             salida.writeObject(Peticiones.LOGOUT);
             salida.writeObject(usuario);
@@ -157,16 +161,16 @@ public class ServicioCliente implements IServicio, Runnable {
     }
 
     @Override
-    public Usuario registrarUsuario(Usuario usuario){
+    public Usuario registrarUsuario(Usuario usuario) {
 
         try {
-            
+
             conectarSocket();
             try {
                 salida.writeObject(Peticiones.REGISTRAR_USUARIO);
                 salida.writeObject(usuario);
                 salida.flush();
-                
+
                 String response = (String) entrada.readObject();
                 if (response.equals(Peticiones.NO_ERROR)) {
                     Usuario user = (Usuario) entrada.readObject();
@@ -182,6 +186,18 @@ public class ServicioCliente implements IServicio, Runnable {
         } catch (IOException ex) {
             return null;
         }
+    }
+
+    public String agregarContacto(String usuario) {
+        try {
+            salida.writeObject(Peticiones.AGREGAR_CONTACTO);
+            salida.writeObject(usuario);
+            salida.flush();
+
+        } catch (IOException ex) {
+            System.err.println(ex.getMessage());
+        }
+        return null;
     }
 
     private static IServicio instancia;

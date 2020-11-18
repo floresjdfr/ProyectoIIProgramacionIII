@@ -18,6 +18,7 @@ public class Peticiones {
     
     public static final String ENVIO_MENSAJE = "ENVIO_MENSAJE";
     public static final String CONTACTOS_EN_LINEA = "CONTACTOS_EN_LINEA";
+    public static final String AGREGAR_CONTACTO = "AGREGAR_CONTACTO";
 
     public static final String NOTIFICAR_LOGOUT = "NOTIFICAR_LOGOUT";
     public static final String NOTIFICAR_LOGIN = "NOTIFICAR_LOGIN";

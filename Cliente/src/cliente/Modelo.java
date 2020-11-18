@@ -20,7 +20,7 @@ public class Modelo extends Observable{
     }
 
     
-
+    
     public Usuario getUsuarioActual() {
         return usuarioActual;
     }
@@ -39,6 +39,10 @@ public class Modelo extends Observable{
     
     String getNombreUsuario() {
         return usuarioActual.getNombreUsuario();
+    }
+    
+    void agregarContacto(String usuario){
+        usuarioActual.agregarContacto(usuario);
     }
     
     private Usuario usuarioActual;

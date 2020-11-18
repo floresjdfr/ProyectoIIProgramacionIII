@@ -156,6 +156,10 @@ public class VentanaChat extends JFrame {
         btnLogOut.addActionListener((ActionEvent e) -> {
             logOut();
         });
+        
+        btnAgregarContacto.addActionListener((ActionEvent e) -> {
+            new VentanaNuevoContacto("Nuevo Contacto", gestorPrincipal).init();
+        });
     }
 
     public void init() {

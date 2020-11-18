@@ -60,6 +60,11 @@ public class UsuarioServidor implements Runnable {
                         } catch (ClassNotFoundException ex) {
                         }
                         break;
+                    
+                    case Peticiones.AGREGAR_CONTACTO:
+                        String usuario = (String) entrada.readObject();
+                        usuario = serviciosServidor.agregarContacto(usuario);
+                        this.agregarContacto(usuario);
                 }
                 salida.flush();
                 
@@ -75,6 +80,15 @@ public class UsuarioServidor implements Runnable {
         if (hilo != null) {
             continuar = true;
             hilo.start();
+        }
+    }
+    
+    public void agregarContacto (String usuario){
+        try{
+            salida.writeObject(Peticiones.AGREGAR_CONTACTO);
+            salida.writeObject(usuario);
+            salida.flush();
+        }catch (IOException ex) {
         }
     }
     

@@ -105,7 +105,14 @@ public class VentanaNuevoContacto extends JFrame{
     }
     
     public void agregarContacto() {
-        
+        String usuario = campoTextoUsuario.getText();
+        usuario = gestorPrincipal.agregarContacto(usuario);
+        if (usuario != null){
+            JOptionPane.showMessageDialog(this,"Contacto agregado!");
+            dispose();
+        } 
+        else
+            JOptionPane.showMessageDialog(this,"Usuario no existe, verificar nombre de usuario!");
     }
     
     private JTextField campoTextoUsuario;

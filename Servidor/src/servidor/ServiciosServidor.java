@@ -30,9 +30,10 @@ public class ServiciosServidor implements IServicio {
     @Override
     public Usuario login(Usuario usuario) throws Exception {
         Usuario user = usuarioDAO.recuperar(usuario.getNombreUsuario());
-        if (user != null){
-            if (user.getClave().equals(usuario.getClave()))
-            return user;
+        if (user != null) {
+            if (user.getClave().equals(usuario.getClave())) {
+                return user;
+            }
         }
         return null;
     }
@@ -61,6 +62,10 @@ public class ServiciosServidor implements IServicio {
     public Usuario registrarUsuario(Usuario usuario) {
         usuarioDAO.agregar(usuario);
         return usuarioDAO.recuperar(usuario.getNombreUsuario());
+    }
+
+    public String agregarContacto(String usuario) {
+        return usuarioDAO.recuperarNombreUsuario(usuario);
     }
 
     private static IServicio instancia;

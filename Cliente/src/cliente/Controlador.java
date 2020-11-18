@@ -62,6 +62,15 @@ public class Controlador {
         return modelo.getNombreUsuario();
     }
     
+    public String agregarContacto(String usuario){
+        
+        usuario = servicioCliente.agregarContacto(usuario);
+        if (usuario != null){
+            modelo.agregarContacto(usuario);
+        }
+        return usuario;
+    }
+    
     private Modelo modelo;
     private final ServicioCliente servicioCliente;
 

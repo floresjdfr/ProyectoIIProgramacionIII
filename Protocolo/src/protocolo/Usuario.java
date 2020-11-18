@@ -21,7 +21,7 @@ public class Usuario implements Serializable{
         this.nombreCompleto = nombreCompleto;
         this.clave = clave;
         this.ultimoAcceso = ultimoAcceso;
-        this.contatos = contactos;
+        this.contactos = contactos;
         this.chats = chats;
     }
 
@@ -30,12 +30,12 @@ public class Usuario implements Serializable{
         this.nombreCompleto = nombreCompleto;
         this.clave = clave;
         this.ultimoAcceso = ultimoAcceso;
-        this.contatos = new ArrayList<>();
+        this.contactos = new ArrayList<>();
         this.chats = new ArrayList<>();
     }
 
     private Usuario() {
-        this.contatos = new ArrayList<>();
+        this.contactos = new ArrayList<>();
         this.chats = new ArrayList<>();
     }
 
@@ -83,11 +83,11 @@ public class Usuario implements Serializable{
     }
     
     public List<String> getContatos() {
-        return contatos;
+        return contactos;
     }
 
     public void setContatos(List<String> contatos) {
-        this.contatos = contatos;
+        this.contactos = contatos;
     }
 
     public List<Chat> getChats() {
@@ -98,13 +98,15 @@ public class Usuario implements Serializable{
         this.chats = chats;
     }
     
-    
+    public void agregarContacto(String usuario){
+        contactos.add(usuario);
+    }
 
     private String nombreUsuario;
     private String nombreCompleto;
     private String clave;
     private LocalDate ultimoAcceso;
-    private List<String> contatos;
+    private List<String> contactos;
     private List<Chat> chats;
 }
 
