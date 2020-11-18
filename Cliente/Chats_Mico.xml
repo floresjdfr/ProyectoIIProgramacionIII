@@ -3,7 +3,22 @@
     <Chats>
         <Chat>
             <Contacto>jd</Contacto>
-            <Mensajes/>
+            <Mensajes>
+                <Mensaje>
+                    <Fecha>2020-11-18</Fecha>
+                    <Mensaje>Hola</Mensaje>
+                    <Reciever>jd</Reciever>
+                    <Secuencia>0</Secuencia>
+                    <Sender>Mico</Sender>
+                </Mensaje>
+                <Mensaje>
+                    <Fecha>2020-11-18</Fecha>
+                    <Mensaje>Hola</Mensaje>
+                    <Reciever>jd</Reciever>
+                    <Secuencia>0</Secuencia>
+                    <Sender>Mico</Sender>
+                </Mensaje>
+            </Mensajes>
         </Chat>
     </Chats>
     <Contactos>

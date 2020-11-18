@@ -2,12 +2,28 @@
 <Usuario>
     <Chats>
         <Chat>
-            <Contacto>marv02</Contacto>
-            <Mensajes/>
+            <Contacto>Mico</Contacto>
+            <Mensajes>
+                <Mensaje>
+                    <Fecha>2020-11-18</Fecha>
+                    <Mensaje>Hola</Mensaje>
+                    <Reciever>jd</Reciever>
+                    <Secuencia>10</Secuencia>
+                    <Sender>Mico</Sender>
+                </Mensaje>
+            </Mensajes>
         </Chat>
         <Chat>
-            <Contacto>Mico</Contacto>
-            <Mensajes/>
+            <Contacto>marv02</Contacto>
+            <Mensajes>
+                <Mensaje>
+                    <Fecha>2020-11-18</Fecha>
+                    <Mensaje>Hola</Mensaje>
+                    <Reciever>marv02</Reciever>
+                    <Secuencia>0</Secuencia>
+                    <Sender>jd</Sender>
+                </Mensaje>
+            </Mensajes>
         </Chat>
     </Chats>
     <Contactos>
