@@ -3,8 +3,6 @@ package cliente;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Observer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import protocolo.Usuario;
 
 /**
@@ -33,7 +31,7 @@ public class Controlador {
         modelo.addObserver(obs);
     }
     
-    public boolean verificarDatosUsuario(String usuario, String clave) throws Exception{
+    public boolean verificarDatosUsuario(String usuario, String clave){
         Usuario user = new Usuario(usuario, clave);
         user = servicioCliente.login(user);
         if (user != null){
@@ -45,7 +43,7 @@ public class Controlador {
         
     }
     
-    public void registrarNuevoUsuario(String usuario, String nombreCompleto, String password) throws IOException{
+    public void registrarNuevoUsuario(String usuario, String nombreCompleto, String password){
         Usuario user = new Usuario(usuario, nombreCompleto, password, LocalDate.now());
         user = servicioCliente.registrarUsuario(user);
         try {
@@ -54,6 +52,15 @@ public class Controlador {
         modelo.setUsuarioActual(user);
     }
     
+    public void logout(){
+        servicioCliente.logout(modelo.getUsuarioActual());
+        modelo.setChatActual(null);
+        modelo.setUsuarioActual(null);
+    }
+    
+    public String getNombreUsuario(){
+        return modelo.getNombreUsuario();
+    }
     
     private Modelo modelo;
     private final ServicioCliente servicioCliente;

@@ -37,8 +37,14 @@ public class Modelo extends Observable{
         this.chatActual = chatActual;
     }
     
+    String getNombreUsuario() {
+        return usuarioActual.getNombreUsuario();
+    }
+    
     private Usuario usuarioActual;
     private Chat chatActual;
+
+    
     
     
 }

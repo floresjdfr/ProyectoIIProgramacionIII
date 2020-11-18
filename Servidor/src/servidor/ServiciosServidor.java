@@ -18,7 +18,7 @@ public class ServiciosServidor implements IServicio {
 
     public static IServicio obtenerInstancia() {
         if (instancia == null) {
-            instancia = new ServiciosServidor();  
+            instancia = new ServiciosServidor();
         }
         return instancia;
     }
@@ -26,18 +26,15 @@ public class ServiciosServidor implements IServicio {
     public void setServidor(Servidor servidor) {
         this.servidor = servidor;
     }
-    
+
     @Override
     public Usuario login(Usuario usuario) throws Exception {
-        Usuario resultado = usuarioDAO.recuperar(usuario.getNombreUsuario());
-        if (resultado != null){
-            if(resultado.getClave().equals(usuario.getClave()))
-                return resultado;
-            else
-                throw new Exception("Contraseña incorrecta");
+        Usuario user = usuarioDAO.recuperar(usuario.getNombreUsuario());
+        if (user != null){
+            if (user.getClave().equals(usuario.getClave()))
+            return user;
         }
-        else
-            throw new Exception("Usuario incorrecto");
+        return null;
     }
 
     @Override
@@ -59,18 +56,15 @@ public class ServiciosServidor implements IServicio {
     public void NotificarLogout(String nombreUsuario) {
         servidor.notificarLogout(nombreUsuario);
     }
-    
+
     @Override
-    public Usuario registrarUsuario(Usuario usuario){
+    public Usuario registrarUsuario(Usuario usuario) {
         usuarioDAO.agregar(usuario);
         return usuarioDAO.recuperar(usuario.getNombreUsuario());
     }
 
     private static IServicio instancia;
 
-    
     Servidor servidor;
     UsuarioDAO usuarioDAO;
 }
-
-    

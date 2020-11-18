@@ -49,24 +49,32 @@ public class Servidor {
                 Usuario usuario = (Usuario) entrada.readObject();
                 if (peticion.equals(Peticiones.LOGIN)) {
                     try {
+                        
                         usuario = serviciosServidor.login(usuario);
                     } catch (Exception ex) {
-                        Logger.getLogger(Servidor.class.getName()).log(Level.SEVERE, null, ex);
+                        usuario = null;
                     }
                 } else if (peticion.equals(Peticiones.REGISTRAR_USUARIO)) {
                     usuario = serviciosServidor.registrarUsuario(usuario);
                 }
 
-                salida.writeObject(Peticiones.NO_ERROR);
-                salida.writeObject(usuario);
-                salida.flush();
+                if (usuario != null) {
+                    salida.writeObject(Peticiones.NO_ERROR);
+                    salida.writeObject(usuario);
+                    salida.flush();
 
-                notificarLogin(usuario.getNombreUsuario());
+                    notificarLogin(usuario.getNombreUsuario());
 
-                UsuarioServidor nuevoUsuarioServidor = new UsuarioServidor(socket, entrada, salida, usuario);
-                usuarios.add(nuevoUsuarioServidor);
+                    UsuarioServidor nuevoUsuarioServidor = new UsuarioServidor(socket, entrada, salida, usuario);
+                    usuarios.add(nuevoUsuarioServidor);
 
-                nuevoUsuarioServidor.iniciar();
+                    nuevoUsuarioServidor.iniciar();
+                }
+                else{
+                    salida.writeObject(Peticiones.ERROR_LOGIN);
+                    salida.writeObject(usuario);
+                    salida.flush();
+                }
 
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(Servidor.class.getName()).log(Level.SEVERE, null, ex);
@@ -75,7 +83,7 @@ public class Servidor {
 
     }
 
-public void notificarLogin(String nombreUsuario) {
+    public void notificarLogin(String nombreUsuario) {
         //REVISAAAAAAAAAAAAAAAAR EFICIENCIA
         for (UsuarioServidor usuario : usuarios) {
             usuario.notificarLogin(nombreUsuario);

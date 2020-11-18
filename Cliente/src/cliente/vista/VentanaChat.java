@@ -5,7 +5,6 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.HeadlessException;
@@ -15,7 +14,6 @@ import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -74,7 +72,9 @@ public class VentanaChat extends JFrame {
         String[] estadoContactos = {"Todos", "Online", "Offline"};
         listaEstado.setModel(new DefaultComboBoxModel<>(estadoContactos));
         
-        panelSuperior.add(new JLabel("Usuario: Bartolomeo"));
+        String user = "Usuario: " + gestorPrincipal.getNombreUsuario();
+        labelLoggedUser = new JLabel(user);
+        panelSuperior.add(labelLoggedUser);
         panelSuperior.add(Box.createHorizontalGlue());
         panelSuperior.add(btnLogOut);
         panelSuperior.add(Box.createRigidArea(new Dimension(8, 0)));
@@ -170,6 +170,7 @@ public class VentanaChat extends JFrame {
     }
     
     public void logOut() {
+        gestorPrincipal.logout();
         dispose();
         new VentanaAplicacion("Chat", gestorPrincipal).init();
     }
@@ -187,6 +188,8 @@ public class VentanaChat extends JFrame {
     private JButton btnLogOut;
     private JButton btnEnviarMensaje;
     private JButton btnAgregarContacto;
+    
+    private JLabel labelLoggedUser;
     
     private final Controlador gestorPrincipal;
 }

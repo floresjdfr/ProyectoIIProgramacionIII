@@ -94,33 +94,40 @@ public class ServicioCliente implements IServicio, Runnable {
     }
 
     @Override
-    public Usuario login(Usuario usuario) throws Exception {
-        conectarSocket();
+    public Usuario login(Usuario usuario){
+        try {
+            conectarSocket();
+        } catch (IOException ex) {
+            Logger.getLogger(ServicioCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
         try {
             salida.writeObject(Peticiones.LOGIN);
             salida.writeObject(usuario);
             salida.flush();
             String response = (String) entrada.readObject();
-            if (response.equals(Peticiones.NO_ERROR)) {
-                Usuario user = (Usuario) entrada.readObject();
+            Usuario user = (Usuario) entrada.readObject();
+            if (response.equals(Peticiones.NO_ERROR) && user != null) {
                 this.iniciar();
                 return user;
             } else {
                 desconectarSocket();
                 throw new Exception("No remote user");
             }
-        } catch (IOException | ClassNotFoundException ex) {
+        }catch (Exception ex) {
             return null;
         }
     }
 
     @Override
-    public void logout(Usuario usuario) throws Exception {
-        salida.writeObject(Peticiones.LOGOUT);
-        salida.writeObject(usuario);
-        salida.flush();
-        this.stopThread();
-        this.desconectarSocket();
+    public void logout(Usuario usuario){
+        try {
+            salida.writeObject(Peticiones.LOGOUT);
+            salida.writeObject(usuario);
+            salida.flush();
+            this.stopThread();
+            this.desconectarSocket();
+        } catch (IOException ex) {
+        }
     }
 
     @Override
@@ -150,24 +157,29 @@ public class ServicioCliente implements IServicio, Runnable {
     }
 
     @Override
-    public Usuario registrarUsuario(Usuario usuario) throws IOException {
+    public Usuario registrarUsuario(Usuario usuario){
 
-        conectarSocket();
         try {
-            salida.writeObject(Peticiones.REGISTRAR_USUARIO);
-            salida.writeObject(usuario);
-            salida.flush();
-
-            String response = (String) entrada.readObject();
-            if (response.equals(Peticiones.NO_ERROR)) {
-                Usuario user = (Usuario) entrada.readObject();
-                this.iniciar();
-                return user;
-            } else {
-                desconectarSocket();
-                throw new Exception("No remote user");
+            
+            conectarSocket();
+            try {
+                salida.writeObject(Peticiones.REGISTRAR_USUARIO);
+                salida.writeObject(usuario);
+                salida.flush();
+                
+                String response = (String) entrada.readObject();
+                if (response.equals(Peticiones.NO_ERROR)) {
+                    Usuario user = (Usuario) entrada.readObject();
+                    this.iniciar();
+                    return user;
+                } else {
+                    desconectarSocket();
+                    throw new Exception("No remote user");
+                }
+            } catch (Exception ex) {
+                return null;
             }
-        } catch (Exception ex) {
+        } catch (IOException ex) {
             return null;
         }
     }
