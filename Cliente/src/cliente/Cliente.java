@@ -46,8 +46,7 @@ public class Cliente {
         Modelo modelo = new Modelo();
         Controlador controlador = new Controlador(modelo);
         
-        //new VentanaAplicacion("Chat", controlador).init();
-        new VentanaNuevoContacto("Agregar Contacto", controlador).init();
+        new VentanaAplicacion("Chat", controlador).init();
     }
     
     
