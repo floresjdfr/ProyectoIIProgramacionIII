@@ -42,7 +42,7 @@ public class Controlador {
         if (user != null){
             modelo.setUsuarioActual(user);
             Xml.obtieneProductosXML(user, modelo);
-            //servicioCliente.verificaContactosEnLinea(usuario, user.getContatos());
+            servicioCliente.verificaContactosEnLinea(usuario, user.getContatos());
             return true;
         }
         else
@@ -63,8 +63,7 @@ public class Controlador {
         servicioCliente.logout(modelo.getUsuarioActual());
         modelo.actualizarChat();
         Xml.guardaUsuarioXML(modelo);
-        modelo.setChatActual(null);
-        modelo.setUsuarioActual(null);
+        modelo.logout();
     }
     
     public String getNombreUsuario(){

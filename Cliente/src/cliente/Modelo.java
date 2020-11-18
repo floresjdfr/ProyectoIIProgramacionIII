@@ -26,6 +26,11 @@ public class Modelo extends Observable {
     public Usuario getUsuarioActual() {
         return usuarioActual;
     }
+    
+    public void logout(){
+        chatActual = null;
+        usuarioActual = null;
+    }
 
     public void setUsuarioActual(Usuario usuarioActual) {
         this.usuarioActual = usuarioActual;
