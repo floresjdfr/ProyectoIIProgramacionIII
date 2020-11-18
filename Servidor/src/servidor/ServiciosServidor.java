@@ -1,5 +1,6 @@
 package servidor;
 
+import DAO.MensajeDAO;
 import DAO.UsuarioDAO;
 import java.util.List;
 import protocolo.IServicio;
@@ -14,6 +15,7 @@ public class ServiciosServidor implements IServicio {
 
     public ServiciosServidor() {
         usuarioDAO = usuarioDAO.obtenerInstancia();
+        mensajeDAO = mensajeDAO.obtenerInstancia();
     }
 
     public static IServicio obtenerInstancia() {
@@ -46,6 +48,7 @@ public class ServiciosServidor implements IServicio {
     @Override
     public void enviarMensaje(Mensaje mensaje) {
         servidor.enviarMensaje(mensaje);
+        mensajeDAO.agregar(mensaje);
     }
 
     @Override
@@ -72,4 +75,5 @@ public class ServiciosServidor implements IServicio {
 
     Servidor servidor;
     UsuarioDAO usuarioDAO;
+    MensajeDAO mensajeDAO;
 }

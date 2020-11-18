@@ -59,6 +59,7 @@ public class MensajeDAO implements DAO<Integer, Mensaje> {
             stm.setString(3, nuevoMensaje.getReciever());
             stm.setDate(4, Date.valueOf(nuevoMensaje.getFecha()));
             stm.setString(5, nuevoMensaje.getMessage());
+            stm.setBoolean(6, true);
             if (stm.executeUpdate() != 1) {
                 throw new IllegalArgumentException(
                         String.format("No se pudo agregar el registro: '%s'",

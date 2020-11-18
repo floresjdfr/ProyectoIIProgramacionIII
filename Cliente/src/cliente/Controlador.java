@@ -104,6 +104,7 @@ public class Controlador {
     
     public void recibirMensaje(Mensaje mensaje){
         modelo.recibirMensaje(mensaje);
+        Xml.guardaUsuarioXML(modelo);
     }
 
     public void recibirContactosEnLinea(List<String> contactos){

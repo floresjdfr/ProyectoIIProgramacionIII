@@ -18,6 +18,48 @@
                     <Secuencia>0</Secuencia>
                     <Sender>Mico</Sender>
                 </Mensaje>
+                <Mensaje>
+                    <Fecha>2020-11-18</Fecha>
+                    <Mensaje>Adios</Mensaje>
+                    <Reciever>jd</Reciever>
+                    <Secuencia>0</Secuencia>
+                    <Sender>Mico</Sender>
+                </Mensaje>
+                <Mensaje>
+                    <Fecha>2020-11-18</Fecha>
+                    <Mensaje>Hello</Mensaje>
+                    <Reciever>Mico</Reciever>
+                    <Secuencia>16</Secuencia>
+                    <Sender>jd</Sender>
+                </Mensaje>
+                <Mensaje>
+                    <Fecha>2020-11-18</Fecha>
+                    <Mensaje>Hola</Mensaje>
+                    <Reciever>jd</Reciever>
+                    <Secuencia>0</Secuencia>
+                    <Sender>Mico</Sender>
+                </Mensaje>
+                <Mensaje>
+                    <Fecha>2020-11-18</Fecha>
+                    <Mensaje>Hola</Mensaje>
+                    <Reciever>jd</Reciever>
+                    <Secuencia>0</Secuencia>
+                    <Sender>Mico</Sender>
+                </Mensaje>
+                <Mensaje>
+                    <Fecha>2020-11-18</Fecha>
+                    <Mensaje>Este es un test</Mensaje>
+                    <Reciever>jd</Reciever>
+                    <Secuencia>0</Secuencia>
+                    <Sender>Mico</Sender>
+                </Mensaje>
+                <Mensaje>
+                    <Fecha>2020-11-18</Fecha>
+                    <Mensaje>Otro Test</Mensaje>
+                    <Reciever>jd</Reciever>
+                    <Secuencia>0</Secuencia>
+                    <Sender>Mico</Sender>
+                </Mensaje>
             </Mensajes>
         </Chat>
     </Chats>

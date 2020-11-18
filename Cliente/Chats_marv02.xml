@@ -11,6 +11,34 @@
                     <Secuencia>11</Secuencia>
                     <Sender>jd</Sender>
                 </Mensaje>
+                <Mensaje>
+                    <Fecha>2020-11-18</Fecha>
+                    <Mensaje>Hello</Mensaje>
+                    <Reciever>marv02</Reciever>
+                    <Secuencia>17</Secuencia>
+                    <Sender>jd</Sender>
+                </Mensaje>
+                <Mensaje>
+                    <Fecha>2020-11-18</Fecha>
+                    <Mensaje>Probando</Mensaje>
+                    <Reciever>marv02</Reciever>
+                    <Secuencia>22</Secuencia>
+                    <Sender>jd</Sender>
+                </Mensaje>
+                <Mensaje>
+                    <Fecha>2020-11-18</Fecha>
+                    <Mensaje>Hola marvin</Mensaje>
+                    <Reciever>marv02</Reciever>
+                    <Secuencia>24</Secuencia>
+                    <Sender>jd</Sender>
+                </Mensaje>
+                <Mensaje>
+                    <Fecha>2020-11-18</Fecha>
+                    <Mensaje>Hola</Mensaje>
+                    <Reciever>marv02</Reciever>
+                    <Secuencia>25</Secuencia>
+                    <Sender>jd</Sender>
+                </Mensaje>
             </Mensajes>
         </Chat>
     </Chats>
