@@ -20,6 +20,7 @@ public class Chat {
         return estado;
     }
 
+    @XmlTransient
     public void setEstado(boolean estado) {
         this.estado = estado;
     }

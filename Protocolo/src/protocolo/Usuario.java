@@ -119,6 +119,10 @@ public class Usuario implements Serializable {
         }
 
     }
+    
+    public void agregarChat(Chat chat){
+        chats.add(chat);
+    }
 
     public Chat buscarChat(String usuarioContacto) {
         for (Chat chat : chats) {

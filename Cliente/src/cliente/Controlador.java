@@ -42,7 +42,7 @@ public class Controlador {
         if (user != null){
             modelo.setUsuarioActual(user);
             Xml.obtieneProductosXML(user, modelo);
-            
+            //servicioCliente.verificaContactosEnLinea(usuario, user.getContatos());
             return true;
         }
         else

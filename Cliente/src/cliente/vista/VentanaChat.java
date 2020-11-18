@@ -48,6 +48,7 @@ public class VentanaChat extends JFrame implements Observer {
         this.gestorPrincipal.registrarObservador(this);
         configurar();
         actualizarContactos();
+        actualizarEstadoContactos();
 
     }
 

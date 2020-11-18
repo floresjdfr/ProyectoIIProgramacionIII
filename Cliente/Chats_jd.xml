@@ -3,50 +3,11 @@
     <Chats>
         <Chat>
             <Contacto>marv02</Contacto>
-            <estado>true</estado>
-            <Mensajes>
-                <Mensaje>
-                    <Fecha>2020-11-18</Fecha>
-                    <Mensaje>Hola Marvin</Mensaje>
-                    <Reciever>marv02</Reciever>
-                    <Secuencia>0</Secuencia>
-                    <Sender>jd</Sender>
-                </Mensaje>
-                <Mensaje>
-                    <Fecha>2020-11-18</Fecha>
-                    <Mensaje>Hola Jose</Mensaje>
-                    <Reciever>jd</Reciever>
-                    <Secuencia>5</Secuencia>
-                    <Sender>marv02</Sender>
-                </Mensaje>
-            </Mensajes>
+            <Mensajes/>
         </Chat>
         <Chat>
             <Contacto>Mico</Contacto>
-            <estado>false</estado>
-            <Mensajes>
-                <Mensaje>
-                    <Fecha>2020-11-18</Fecha>
-                    <Mensaje>Hola</Mensaje>
-                    <Reciever>Mico</Reciever>
-                    <Secuencia>0</Secuencia>
-                    <Sender>jd</Sender>
-                </Mensaje>
-                <Mensaje>
-                    <Fecha>2020-11-18</Fecha>
-                    <Mensaje>Hola</Mensaje>
-                    <Reciever>Mico</Reciever>
-                    <Secuencia>0</Secuencia>
-                    <Sender>jd</Sender>
-                </Mensaje>
-                <Mensaje>
-                    <Fecha>2020-11-18</Fecha>
-                    <Mensaje>Hola</Mensaje>
-                    <Reciever>jd</Reciever>
-                    <Secuencia>8</Secuencia>
-                    <Sender>Mico</Sender>
-                </Mensaje>
-            </Mensajes>
+            <Mensajes/>
         </Chat>
     </Chats>
     <Contactos>

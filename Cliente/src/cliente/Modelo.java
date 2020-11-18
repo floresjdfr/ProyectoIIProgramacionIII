@@ -29,6 +29,9 @@ public class Modelo extends Observable {
 
     public void setUsuarioActual(Usuario usuarioActual) {
         this.usuarioActual = usuarioActual;
+        
+        setChanged();
+        notifyObservers();
     }
 
     public Chat getChatActual() {
@@ -48,6 +51,8 @@ public class Modelo extends Observable {
 
     public void agregarContacto(String usuario) {
         usuarioActual.agregarContacto(usuario);
+        Chat chat = new Chat(usuario);
+        usuarioActual.agregarChat(chat);
 
         setChanged();
         notifyObservers();
