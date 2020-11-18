@@ -187,7 +187,9 @@ public class VentanaChat extends JFrame implements Observer{
         String mensaje = campoMensaje.getText();
         campoMensaje.setText(null);
         
-        gestorPrincipal.enviarMensaje(mensaje);
+        if(!mensaje.equals("")){
+            gestorPrincipal.enviarMensaje(mensaje);
+        }
     }
     
     public void logOut() {

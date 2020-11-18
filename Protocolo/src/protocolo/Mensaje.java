@@ -26,7 +26,7 @@ public class Mensaje implements Serializable  {
 
     @Override
     public String toString() {
-        return "Mensaje{" + "secuencia=" + secuencia + ", sender=" + sender + ", reciever=" + reciever + ", message=" + message + ", fecha=" + fecha + ", enviado=" + enviado + '}';
+        return String.format("[%s]: %s\n", sender, message);
     }
     
     

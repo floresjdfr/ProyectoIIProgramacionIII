@@ -72,7 +72,7 @@ public class Modelo extends Observable {
         if (chatActual != null) {
             StringBuilder mensajes = new StringBuilder();
             for (Mensaje mensaje : chatActual.getMensajes()) {
-                mensajes.append(mensaje.getMessage() + "\n");
+                mensajes.append(mensaje);
             }
             return mensajes.toString();
         }
