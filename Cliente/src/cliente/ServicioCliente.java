@@ -74,7 +74,9 @@ public class ServicioCliente implements IServicio, Runnable {
                         break;
                     case Peticiones.AGREGAR_CONTACTO:
                         String usuario = (String) entrada.readObject();
-                        System.out.print(usuario);
+                        if (usuario != null){
+                            controlador.agregarContacto(usuario);
+                        }
                         break;
                 }
                 salida.flush();
@@ -188,7 +190,7 @@ public class ServicioCliente implements IServicio, Runnable {
         }
     }
 
-    public String agregarContacto(String usuario) {
+    public void agregarContacto(String usuario) {
         try {
             salida.writeObject(Peticiones.AGREGAR_CONTACTO);
             salida.writeObject(usuario);
@@ -197,13 +199,17 @@ public class ServicioCliente implements IServicio, Runnable {
         } catch (IOException ex) {
             System.err.println(ex.getMessage());
         }
-        return null;
     }
 
+    public void setControlador(Controlador controlador) {
+        this.controlador = controlador;
+    }
+    
     private static IServicio instancia;
     private Socket socket;
     private ObjectInputStream entrada;
     private ObjectOutputStream salida;
     private Thread hiloControl;
     private boolean continuar = true;
+    private Controlador controlador;
 }

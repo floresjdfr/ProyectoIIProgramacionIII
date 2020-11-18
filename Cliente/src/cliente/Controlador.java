@@ -12,11 +12,13 @@ import protocolo.Usuario;
 public class Controlador {
     public Controlador() {
         this.servicioCliente = (ServicioCliente) ServicioCliente.obtenerInstancia();
+        this.servicioCliente.setControlador(this);
     }
 
     public Controlador(Modelo modelo) {
         this.modelo = modelo;
         this.servicioCliente = (ServicioCliente) ServicioCliente.obtenerInstancia();
+        this.servicioCliente.setControlador(this);
     }
 
     public Modelo getModelo() {
@@ -62,13 +64,13 @@ public class Controlador {
         return modelo.getNombreUsuario();
     }
     
-    public String agregarContacto(String usuario){
+    public void agregarContacto(String usuario){
         
-        usuario = servicioCliente.agregarContacto(usuario);
-        if (usuario != null){
-            modelo.agregarContacto(usuario);
+        servicioCliente.agregarContacto(usuario);
+        for (String contacto: modelo.getUsuarioActual().getContatos()){
+            System.out.print(contacto);
         }
-        return usuario;
+        
     }
     
     private Modelo modelo;
