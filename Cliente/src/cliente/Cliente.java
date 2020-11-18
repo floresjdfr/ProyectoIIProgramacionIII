@@ -6,6 +6,7 @@
 package cliente;
 
 import cliente.vista.VentanaAplicacion;
+import cliente.vista.VentanaNuevoContacto;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
@@ -42,11 +43,11 @@ public class Cliente {
     }
     
     public static void mostrarInterfaz() {
-        
         Modelo modelo = new Modelo();
         Controlador controlador = new Controlador(modelo);
         
-        new VentanaAplicacion("Chat", controlador).init();
+        //new VentanaAplicacion("Chat", controlador).init();
+        new VentanaNuevoContacto("Agregar Contacto", controlador).init();
     }
     
     
