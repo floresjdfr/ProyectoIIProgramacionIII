@@ -14,6 +14,7 @@ import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -41,7 +42,7 @@ public class VentanaChat extends JFrame {
     }
 
     private void configurar() {
-        //setIconImage(new ImageIcon(getClass().getResource("/images/chat.png")).getImage());
+        setIconImage(new ImageIcon(getClass().getResource("/images/chat.png")).getImage());
         ajustarComponentes(getContentPane());
 
         setResizable(false);

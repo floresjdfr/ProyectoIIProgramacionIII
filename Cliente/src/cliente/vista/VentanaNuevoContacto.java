@@ -15,6 +15,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
@@ -38,7 +39,7 @@ public class VentanaNuevoContacto extends JFrame{
     }
     
     private void configurar() {
-        //setIconImage(new ImageIcon(getClass().getResource("/images/chat.png")).getImage());
+        setIconImage(new ImageIcon(getClass().getResource("/images/chat.png")).getImage());
         ajustarComponentes(getContentPane());
 
         setResizable(false);

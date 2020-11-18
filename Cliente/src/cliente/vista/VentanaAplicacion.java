@@ -31,7 +31,7 @@ public class VentanaAplicacion extends JFrame {
     }
 
     private void configurar() {
-        //setIconImage(new ImageIcon(getClass().getResource("cliente/imagenes/chat.png")).getImage());
+        setIconImage(new ImageIcon(getClass().getResource("/images/chat.png")).getImage());
         ajustarComponentes(getContentPane());
 
         setResizable(false);

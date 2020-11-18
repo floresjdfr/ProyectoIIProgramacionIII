@@ -6,7 +6,6 @@
 package cliente;
 
 import cliente.vista.VentanaAplicacion;
-import cliente.vista.VentanaNuevoContacto;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
