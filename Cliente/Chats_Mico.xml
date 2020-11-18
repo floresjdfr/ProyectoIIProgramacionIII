@@ -3,20 +3,21 @@
     <Chats>
         <Chat>
             <Contacto>jd</Contacto>
+            <estado>false</estado>
             <Mensajes>
                 <Mensaje>
                     <Fecha>2020-11-18</Fecha>
-                    <Mensaje>Hola Marvin</Mensaje>
-                    <Reciever>marv02</Reciever>
-                    <Secuencia>4</Secuencia>
+                    <Mensaje>Hola</Mensaje>
+                    <Reciever>Mico</Reciever>
+                    <Secuencia>7</Secuencia>
                     <Sender>jd</Sender>
                 </Mensaje>
                 <Mensaje>
                     <Fecha>2020-11-18</Fecha>
-                    <Mensaje>Hola Jose</Mensaje>
+                    <Mensaje>Hola</Mensaje>
                     <Reciever>jd</Reciever>
                     <Secuencia>0</Secuencia>
-                    <Sender>marv02</Sender>
+                    <Sender>Mico</Sender>
                 </Mensaje>
             </Mensajes>
         </Chat>
@@ -24,5 +25,5 @@
     <Contactos>
         <contatos>jd</contatos>
     </Contactos>
-    <Nombre_Usuario>marv02</Nombre_Usuario>
+    <Nombre_Usuario>Mico</Nombre_Usuario>
 </Usuario>

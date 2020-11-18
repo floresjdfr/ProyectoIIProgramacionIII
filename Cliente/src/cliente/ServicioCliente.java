@@ -66,6 +66,7 @@ public class ServicioCliente implements IServicio, Runnable {
                         break;
                     case Peticiones.CONTACTOS_EN_LINEA:
                         List<String> contactosEnLinea = (List<String>) entrada.readObject();
+                        recibirContactosEnLinea(contactosEnLinea);
                         break;
 
                     case Peticiones.NOTIFICAR_LOGOUT:
@@ -73,6 +74,7 @@ public class ServicioCliente implements IServicio, Runnable {
                         break;
                     case Peticiones.NOTIFICAR_LOGIN:
                         String usuarioLoggedIn = (String) entrada.readObject();
+                        notificarLoginDeUsuario(usuarioLoggedIn);
                         break;
                     
                     case Peticiones.AGREGAR_CONTACTO:
@@ -212,6 +214,26 @@ public class ServicioCliente implements IServicio, Runnable {
         } catch (IOException | InterruptedException ex) {
             return null;
         }
+    }
+    
+    private void recibirContactosEnLinea(List<String> contactos){
+        Thread hilo = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                controlador.recibirContactosEnLinea(contactos);
+            }
+        });
+        hilo.start();
+    }
+    
+    private void notificarLoginDeUsuario(String usuarioLoggeado){
+        Thread hilo = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                controlador.notificarLoginUsuario(usuarioLoggeado);
+            }
+        });
+        hilo.start();
     }
     
     private void recibirMensaje(Mensaje mensaje) {

@@ -61,6 +61,7 @@ public class Controlador {
     
     public void logout(){
         servicioCliente.logout(modelo.getUsuarioActual());
+        modelo.actualizarChat();
         Xml.guardaUsuarioXML(modelo);
         modelo.setChatActual(null);
         modelo.setUsuarioActual(null);
@@ -79,7 +80,7 @@ public class Controlador {
     }
     
     public void enviarMensaje(String mensaje) {
-        Mensaje msj = new Mensaje(1111, modelo.getNombreUsuario(), modelo.obtenerContactoActual(), mensaje, LocalDate.now());
+        Mensaje msj = new Mensaje(0, modelo.getNombreUsuario(), modelo.obtenerContactoActual(), mensaje, LocalDate.now());
         servicioCliente.enviarMensaje(msj);
         modelo.enviarMensaje(msj);
     }
@@ -106,7 +107,17 @@ public class Controlador {
         modelo.recibirMensaje(mensaje);
     }
 
+    public void recibirContactosEnLinea(List<String> contactos){
+        modelo.recibirContactosEnLinea(contactos);
+    }
+
+    public List<Chat> obtenerChats() {
+        return modelo.getChats();
+    }
     
+    public void notificarLoginUsuario(String usuario){
+        modelo.cambiarEstadoUsuario(usuario, true);
+    }
 
     
 

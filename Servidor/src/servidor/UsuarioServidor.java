@@ -1,10 +1,14 @@
 package servidor;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.List;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import protocolo.Mensaje;
@@ -48,6 +52,10 @@ public class UsuarioServidor implements Runnable {
                         Mensaje mensaje = null;
                         try {
                             mensaje = (Mensaje) entrada.readObject();
+                            int secuencia = this.cargarSecuencia();
+                            mensaje.setSecuencia(secuencia);
+                            secuencia++;
+                            this.guardarSecuencia(secuencia);
                             serviciosServidor.enviarMensaje(mensaje);
                         } catch (ClassNotFoundException ex) {
                         }
@@ -75,6 +83,31 @@ public class UsuarioServidor implements Runnable {
         }
     }
 
+        
+    public int cargarSecuencia() {
+        try {
+            File myObj = new File("secuencia.txt");
+            Scanner myReader = new Scanner(myObj);
+            int numero = 0;
+            while (myReader.hasNextLine()) {
+                numero = myReader.nextInt();
+            }
+            myReader.close();
+            return numero;
+        } catch (FileNotFoundException e) {
+            return 0;
+        }
+    }
+    
+    public void guardarSecuencia(int numeroNuevo) {
+        try {
+            FileWriter myWriter = new FileWriter("secuencia.txt");
+            myWriter.write(String.valueOf(numeroNuevo));
+            myWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     public void iniciar() {
         hilo = new Thread(this);
         if (hilo != null) {

@@ -3,6 +3,8 @@ package protocolo;
 import java.io.Serializable;
 import java.time.LocalDate;
 import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import utiles.LocalDateAdapter;
 
 /**
  *
@@ -70,6 +72,7 @@ public class Mensaje implements Serializable  {
         return fecha;
     }
 
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
     @XmlElement(name = "Fecha")
     public void setFecha(LocalDate fecha) {
         this.fecha = fecha;

@@ -16,6 +16,14 @@ public class Chat {
         mensajes = new ArrayList<>();
     }
 
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+    
     public Chat(String contacto) {
         this.contacto = contacto;
         mensajes = new ArrayList<>();
@@ -49,7 +57,7 @@ public class Chat {
         mensajes.add(mensaje);
     }
     
-    
+    private boolean estado;
     private String contacto;
     private List<Mensaje> mensajes;
     

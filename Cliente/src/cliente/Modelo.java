@@ -107,5 +107,31 @@ public class Modelo extends Observable {
         setChanged();
         notifyObservers();
     }
+    
+    public void recibirContactosEnLinea(List<String> contactosEnLinea){
+        List<Chat> chatsUsuarioActual =  usuarioActual.getChats();
+        for (Chat chat: chatsUsuarioActual){
+            if(contactosEnLinea.contains(chat.getContacto()))
+                chat.setEstado(true);
+        }
+        
+        setChanged();
+        notifyObservers();
+    }
+
+    public List<Chat> getChats() {
+        return usuarioActual.getChats();
+    }
+    
+    public void cambiarEstadoUsuario(String usuario, boolean estado){
+        List<Chat> chatsUsuarioActual =  usuarioActual.getChats();
+        for (Chat chat: chatsUsuarioActual){
+            if(usuario.equals(chat.getContacto()))
+                chat.setEstado(estado);
+        }
+        
+        setChanged();
+        notifyObservers();
+    }
 
 }
