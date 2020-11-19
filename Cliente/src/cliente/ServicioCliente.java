@@ -76,11 +76,12 @@ public class ServicioCliente implements IServicio, Runnable {
                         String usuarioLoggedIn = (String) entrada.readObject();
                         notificarLoginDeUsuario(usuarioLoggedIn);
                         break;
-                    
+
                     case Peticiones.AGREGAR_CONTACTO:
                         String usuario = (String) entrada.readObject();
-                        if (usuario != null)
+                        if (usuario != null) {
                             contactoRecibido = usuario;
+                        }
                         break;
                 }
                 salida.flush();
@@ -200,11 +201,10 @@ public class ServicioCliente implements IServicio, Runnable {
             salida.writeObject(Peticiones.AGREGAR_CONTACTO);
             salida.writeObject(usuario);
             salida.flush();
-            
-            
+
             sleep(500);//Espera la respuesta de servidor
-            
-            if (contactoRecibido != null){
+
+            if (contactoRecibido != null) {
                 usuario = contactoRecibido;
                 contactoRecibido = null;
                 return usuario;
@@ -215,27 +215,24 @@ public class ServicioCliente implements IServicio, Runnable {
             return null;
         }
     }
-    
-    private void recibirContactosEnLinea(List<String> contactos){
-        Thread hilo = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                controlador.recibirContactosEnLinea(contactos);
-            }
-        });
-        hilo.start();
+
+    private void recibirContactosEnLinea(List<String> contactos) {
+        controlador.recibirContactosEnLinea(contactos);
+
     }
-    
-    private void notificarLoginDeUsuario(String usuarioLoggeado){
-        Thread hilo = new Thread(new Runnable() {
+
+    private void notificarLoginDeUsuario(String usuarioLoggeado) {
+        /*Thread hilo = new Thread(new Runnable() {
             @Override
             public void run() {
                 controlador.notificarLoginUsuario(usuarioLoggeado);
             }
         });
         hilo.start();
+*/
+        controlador.notificarLoginUsuario(usuarioLoggeado);
     }
-    
+
     private void recibirMensaje(Mensaje mensaje) {
         Thread hilo = new Thread(new Runnable() {
             @Override
@@ -245,8 +242,8 @@ public class ServicioCliente implements IServicio, Runnable {
         });
         hilo.start();
     }
-    
-    public void setContolador(Controlador controlador){
+
+    public void setContolador(Controlador controlador) {
         this.controlador = controlador;
     }
 
@@ -259,5 +256,4 @@ public class ServicioCliente implements IServicio, Runnable {
     private String contactoRecibido = null;
     private Controlador controlador;
 
-   
 }

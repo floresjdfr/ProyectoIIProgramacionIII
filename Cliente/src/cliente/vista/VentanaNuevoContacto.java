@@ -13,6 +13,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
+import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -23,6 +24,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
+import protocolo.Chat;
 
 /**
  *
@@ -106,6 +108,7 @@ public class VentanaNuevoContacto extends JFrame{
         String usuario = campoTextoUsuario.getText();
         usuario = gestorPrincipal.agregarContacto(usuario);
         if (usuario != null){
+            
             JOptionPane.showMessageDialog(this,"Contacto agregado!");
             dispose();
         }

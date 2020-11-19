@@ -157,4 +157,9 @@ public class Modelo extends Observable {
         notifyObservers();
     }
 
+    public void actualizar() {
+        setChanged();
+        notifyObservers();
+    }
+
 }

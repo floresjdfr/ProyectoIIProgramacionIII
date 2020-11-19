@@ -41,9 +41,29 @@
                 </Mensaje>
             </Mensajes>
         </Chat>
+        <Chat>
+            <Contacto>Mico</Contacto>
+            <Mensajes>
+                <Mensaje>
+                    <Fecha>2020-11-18</Fecha>
+                    <Mensaje>.</Mensaje>
+                    <Reciever>marv02</Reciever>
+                    <Secuencia>27</Secuencia>
+                    <Sender>Mico</Sender>
+                </Mensaje>
+                <Mensaje>
+                    <Fecha>2020-11-18</Fecha>
+                    <Mensaje>h</Mensaje>
+                    <Reciever>marv02</Reciever>
+                    <Secuencia>28</Secuencia>
+                    <Sender>Mico</Sender>
+                </Mensaje>
+            </Mensajes>
+        </Chat>
     </Chats>
     <Contactos>
         <contatos>jd</contatos>
+        <contatos>Mico</contatos>
     </Contactos>
     <Nombre_Usuario>marv02</Nombre_Usuario>
 </Usuario>

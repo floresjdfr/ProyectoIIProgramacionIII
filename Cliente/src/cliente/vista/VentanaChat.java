@@ -169,7 +169,9 @@ public class VentanaChat extends JFrame implements Observer {
         });
 
         btnAgregarContacto.addActionListener((ActionEvent e) -> {
-            new VentanaNuevoContacto("Nuevo Contacto", gestorPrincipal).init();
+            VentanaNuevoContacto ventana = new VentanaNuevoContacto("Nuevo Contacto", gestorPrincipal);
+            ventana.init();
+
         });
 
         tablaListaContactos.addMouseListener(new MouseAdapter() {
@@ -177,6 +179,7 @@ public class VentanaChat extends JFrame implements Observer {
             public void mouseClicked(MouseEvent evt) {
                 if (evt.getClickCount() == 2) {
                     String usuario = obtenerUsuarioTabla();
+
                     seleccionarChatUsuario(usuario);
                 }
             }
@@ -194,14 +197,37 @@ public class VentanaChat extends JFrame implements Observer {
 
     public void solicitarEstadoContactos(String estado) {
         switch (estado) {
-            case "Todos": {
+            case "Todos":
+                actualizarContactos();
+                actualizarEstadoContactos();
                 break;
+            case "Online":
+                obtieneEstadoOnline();
+                break;
+            case "Offline":
+                obtieneEstadoOffline();
+                break;
+        }
+    }
+
+    public void obtieneEstadoOnline() {
+        modeloTabla.setRowCount(0);
+        List<Chat> chats = gestorPrincipal.obtenerChats();
+        for (Chat chat : chats) {
+            if (chat.isEstado()) {
+                Object[] objectoAgregado = {chat.getContacto(), "Online"};
+                modeloTabla.addRow(objectoAgregado);
             }
-            case "Online": {
-                break;
-            }
-            case "Offline": {
-                break;
+        }
+    }
+
+    public void obtieneEstadoOffline() {
+        modeloTabla.setRowCount(0);
+        List<Chat> chats = gestorPrincipal.obtenerChats();
+        for (Chat chat : chats) {
+            if (!chat.isEstado()) {
+                Object[] objectoAgregado = {chat.getContacto(), "Offline"};
+                modeloTabla.addRow(objectoAgregado);
             }
         }
     }
@@ -230,6 +256,7 @@ public class VentanaChat extends JFrame implements Observer {
         for (Chat chat : chats) {
             String nombreUsuario = chat.getContacto();
             boolean estado = chat.isEstado();
+            System.out.println("Contacto: " + nombreUsuario + estado);
             for (int i = 0; i < modeloTabla.getRowCount(); i++) {
                 if (modeloTabla.getValueAt(i, 0).toString().equals(nombreUsuario)) {
                     if (estado) {
@@ -239,7 +266,6 @@ public class VentanaChat extends JFrame implements Observer {
                     }
                 }
             }
-
         }
     }
 

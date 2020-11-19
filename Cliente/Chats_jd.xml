@@ -114,6 +114,13 @@
                     <Secuencia>0</Secuencia>
                     <Sender>jd</Sender>
                 </Mensaje>
+                <Mensaje>
+                    <Fecha>2020-11-18</Fecha>
+                    <Mensaje>Hola JD</Mensaje>
+                    <Reciever>jd</Reciever>
+                    <Secuencia>26</Secuencia>
+                    <Sender>marv02</Sender>
+                </Mensaje>
             </Mensajes>
         </Chat>
     </Chats>
