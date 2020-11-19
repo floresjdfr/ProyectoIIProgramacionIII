@@ -58,9 +58,6 @@ public class Modelo extends Observable {
         usuarioActual.agregarContacto(usuario);
         Chat chat = new Chat(usuario);
         usuarioActual.agregarChat(chat);
-
-        setChanged();
-        notifyObservers();
     }
 
     public void enviarMensaje(Mensaje mensaje) {
@@ -160,6 +157,16 @@ public class Modelo extends Observable {
     public void actualizar() {
         setChanged();
         notifyObservers();
+    }
+
+    void notificarLogoutUsuario(String usuario) {
+        List<Chat> chats = usuarioActual.getChats();
+        for (Chat chat:chats){
+            if (chat.getContacto().equals(usuario))
+                chat.setEstado(false);
+        }
+        
+        actualizar();
     }
 
 }

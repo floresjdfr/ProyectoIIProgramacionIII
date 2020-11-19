@@ -69,6 +69,7 @@ public class Controlador {
         modelo.actualizarChat();
         Xml.guardaUsuarioXML(modelo);
         modelo.logout();
+
     }
 
     public String getNombreUsuario() {
@@ -79,13 +80,15 @@ public class Controlador {
 
         usuario = servicioCliente.agregarContacto(usuario);
         if (usuario != null) {
+
             modelo.agregarContacto(usuario);
             Usuario user = modelo.getUsuarioActual();
             String nombreUsuario = user.getNombreUsuario();
             List<String> contactos = user.getContatos();
             servicioCliente.verificaContactosEnLinea(nombreUsuario, contactos);
-            
+
             modelo.actualizar();
+
         }
 
         return usuario;
@@ -130,6 +133,10 @@ public class Controlador {
 
     public void notificarLoginUsuario(String usuario) {
         modelo.cambiarEstadoUsuario(usuario, true);
+    }
+
+    public void loggout(String usuario) {
+        modelo.notificarLogoutUsuario(usuario);
     }
 
 }

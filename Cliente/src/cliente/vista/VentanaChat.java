@@ -256,7 +256,6 @@ public class VentanaChat extends JFrame implements Observer {
         for (Chat chat : chats) {
             String nombreUsuario = chat.getContacto();
             boolean estado = chat.isEstado();
-            System.out.println("Contacto: " + nombreUsuario + estado);
             for (int i = 0; i < modeloTabla.getRowCount(); i++) {
                 if (modeloTabla.getValueAt(i, 0).toString().equals(nombreUsuario)) {
                     if (estado) {
@@ -298,7 +297,8 @@ public class VentanaChat extends JFrame implements Observer {
     }
 
     @Override
-    public void update(Observable o, Object arg) {
+    public void update(Observable o, Object arg) {       
+        
         actualizarContactos();
         actualizarMensajes();
         actualizarEstadoContactos();

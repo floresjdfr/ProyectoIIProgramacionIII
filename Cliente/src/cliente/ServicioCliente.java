@@ -5,6 +5,7 @@
  */
 package cliente;
 
+import static cliente.Cliente.mostrarInterfaz;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -13,6 +14,7 @@ import java.net.Socket;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.SwingUtilities;
 import protocolo.IServicio;
 import protocolo.Mensaje;
 import protocolo.Peticiones;
@@ -71,6 +73,7 @@ public class ServicioCliente implements IServicio, Runnable {
 
                     case Peticiones.NOTIFICAR_LOGOUT:
                         String nombreUsuarioLoggedOut = (String) entrada.readObject();
+                        NotificarLogout(nombreUsuarioLoggedOut);
                         break;
                     case Peticiones.NOTIFICAR_LOGIN:
                         String usuarioLoggedIn = (String) entrada.readObject();
@@ -154,17 +157,18 @@ public class ServicioCliente implements IServicio, Runnable {
     @Override
     public void verificaContactosEnLinea(String nombreUsuario, List<String> listaContactos) {
         try {
+            
             salida.writeObject(Peticiones.CONTACTOS_EN_LINEA);
             salida.writeObject(listaContactos);
             salida.flush();
+            
         } catch (IOException ex) {
         }
     }
 
     @Override
     public void NotificarLogout(String nombreUsuario) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        //Falta
+        controlador.loggout(nombreUsuario);
     }
 
     @Override
@@ -218,7 +222,6 @@ public class ServicioCliente implements IServicio, Runnable {
 
     private void recibirContactosEnLinea(List<String> contactos) {
         controlador.recibirContactosEnLinea(contactos);
-
     }
 
     private void notificarLoginDeUsuario(String usuarioLoggeado) {
@@ -229,7 +232,7 @@ public class ServicioCliente implements IServicio, Runnable {
             }
         });
         hilo.start();
-*/
+         */
         controlador.notificarLoginUsuario(usuarioLoggeado);
     }
 
