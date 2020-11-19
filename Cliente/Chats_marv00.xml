@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Usuario>
+    <Chats>
+        <Chat>
+            <Contacto>jdflores</Contacto>
+            <Mensajes>
+                <Mensaje>
+                    <Fecha>2020-11-19</Fecha>
+                    <Mensaje>hola jose</Mensaje>
+                    <Reciever>jdflores</Reciever>
+                    <Secuencia>0</Secuencia>
+                    <Sender>marv00</Sender>
+                </Mensaje>
+                <Mensaje>
+                    <Fecha>2020-11-19</Fecha>
+                    <Mensaje>hola todo bien</Mensaje>
+                    <Reciever>marv00</Reciever>
+                    <Secuencia>1</Secuencia>
+                    <Sender>jdflores</Sender>
+                </Mensaje>
+                <Mensaje>
+                    <Fecha>2020-11-19</Fecha>
+                    <Mensaje>pura vida</Mensaje>
+                    <Reciever>jdflores</Reciever>
+                    <Secuencia>0</Secuencia>
+                    <Sender>marv00</Sender>
+                </Mensaje>
+                <Mensaje>
+                    <Fecha>2020-11-19</Fecha>
+                    <Mensaje>testing...</Mensaje>
+                    <Reciever>marv00</Reciever>
+                    <Secuencia>3</Secuencia>
+                    <Sender>jdflores</Sender>
+                </Mensaje>
+                <Mensaje>
+                    <Fecha>2020-11-19</Fecha>
+                    <Mensaje>test</Mensaje>
+                    <Reciever>jdflores</Reciever>
+                    <Secuencia>0</Secuencia>
+                    <Sender>marv00</Sender>
+                </Mensaje>
+                <Mensaje>
+                    <Fecha>2020-11-19</Fecha>
+                    <Mensaje>hasta luego</Mensaje>
+                    <Reciever>jdflores</Reciever>
+                    <Secuencia>0</Secuencia>
+                    <Sender>marv00</Sender>
+                </Mensaje>
+                <Mensaje>
+                    <Fecha>2020-11-19</Fecha>
+                    <Mensaje>adios</Mensaje>
+                    <Reciever>marv00</Reciever>
+                    <Secuencia>6</Secuencia>
+                    <Sender>jdflores</Sender>
+                </Mensaje>
+            </Mensajes>
+        </Chat>
+        <Chat>
+            <Contacto>mari12</Contacto>
+            <Mensajes>
+                <Mensaje>
+                    <Fecha>2020-11-19</Fecha>
+                    <Mensaje>hola maria, como está?</Mensaje>
+                    <Reciever>mari12</Reciever>
+                    <Secuencia>0</Secuencia>
+                    <Sender>marv00</Sender>
+                </Mensaje>
+                <Mensaje>
+                    <Fecha>2020-11-19</Fecha>
+                    <Mensaje>hola hola todo bien</Mensaje>
+                    <Reciever>marv00</Reciever>
+                    <Secuencia>9</Secuencia>
+                    <Sender>mari12</Sender>
+                </Mensaje>
+                <Mensaje>
+                    <Fecha>2020-11-19</Fecha>
+                    <Mensaje>todo bien</Mensaje>
+                    <Reciever>mari12</Reciever>
+                    <Secuencia>0</Secuencia>
+                    <Sender>marv00</Sender>
+                </Mensaje>
+            </Mensajes>
+        </Chat>
+    </Chats>
+    <Contactos>
+        <contatos>jdflores</contatos>
+        <contatos>mari12</contatos>
+    </Contactos>
+    <Nombre_Usuario>marv00</Nombre_Usuario>
+</Usuario>

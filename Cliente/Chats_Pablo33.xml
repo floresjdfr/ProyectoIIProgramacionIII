@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Usuario>
+    <Chats>
+        <Chat>
+            <Contacto>mari12</Contacto>
+            <Mensajes/>
+        </Chat>
+        <Chat>
+            <Contacto>jdflores</Contacto>
+            <Mensajes>
+				<Mensaje>
+                    <Fecha>2020-11-19</Fecha>
+                    <Mensaje>hola pablo</Mensaje>
+                    <Reciever>Pablo33</Reciever>
+                    <Secuencia>0</Secuencia>
+                    <Sender>jdflores</Sender>
+                </Mensaje>
+                <Mensaje>
+                    <Fecha>2020-11-19</Fecha>
+                    <Mensaje>hola jose</Mensaje>
+                    <Reciever>jdflores</Reciever>
+                    <Secuencia>0</Secuencia>
+                    <Sender>Pablo33</Sender>
+                </Mensaje>
+                <Mensaje>
+                    <Fecha>2020-11-19</Fecha>
+                    <Mensaje>todo bien</Mensaje>
+                    <Reciever>jdflores</Reciever>
+                    <Secuencia>0</Secuencia>
+                    <Sender>Pablo33</Sender>
+                </Mensaje>
+            </Mensajes>
+        </Chat>
+    </Chats>
+    <Contactos>
+        <contatos>jdflores</contatos>
+        <contatos>mari12</contatos>
+    </Contactos>
+    <Nombre_Usuario>Pablo33</Nombre_Usuario>
+</Usuario>
